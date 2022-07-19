@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT ssafy (student*)>
+<!ELEMENT student (name, loc, phone?)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT loc (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ATTLIST student no CDATA "0">

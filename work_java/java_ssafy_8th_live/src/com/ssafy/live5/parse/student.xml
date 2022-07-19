@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ssafy SYSTEM "./student.dtd">
+<ssafy>
+	<student no="12345">
+		<name>홍길동</name>
+		<loc>광주</loc>
+		<phone>010-222-3333</phone>
+	</student>
+
+	<student no="23456">
+		<name>장길산</name>
+		<loc>서울</loc>
+		<phone>010-333-4444</phone>
+	</student>
+
+	<student no="34567">
+		<name>임꺽정</name>
+		<loc>대전</loc>
+	</student>
+</ssafy>
