@@ -14,6 +14,8 @@ public class Zigzag {
 			System.out.println();
 		}
 
+		
+		
 		System.out.println("-------------------------------------------");
 		// 역방향
 		for (int i = 0; i < arr.length; i++) {
@@ -22,6 +24,9 @@ public class Zigzag {
 			}
 			System.out.println();
 		}
+		
+		
+		
 		System.out.println("-------------------------------------------");
 		// 지그재그
 		for (int i = 0; i < arr.length; i++) {
