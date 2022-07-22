@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.ssafy.offline1.array.Zigzag" project="JavaArrayPrac0719" 
-    file="/JavaArrayPrac0719/src/com/ssafy/offline1/array/Zigzag.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="com.ssafy.offline1.array.Zigzag" project="java_ssafy_8th_offline" 
+    file="/java_ssafy_8th_offline/src/com/ssafy/offline1/array/Zigzag.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="112" width="115" x="391" y="214"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.ssafy.offline1.array.ArrayTest_30" project="JavaArrayPrac0719" 
-    file="/JavaArrayPrac0719/src/com/ssafy/offline1/array/ArrayTest_30.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="com.ssafy.offline1.array.ArrayTest_30" project="java_ssafy_8th_offline" 
+    file="/java_ssafy_8th_offline/src/com/ssafy/offline1/array/ArrayTest_30.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="115" width="115" x="261" y="215"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
