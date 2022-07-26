@@ -70,8 +70,16 @@ public class BoxOfficeUi extends JFrame {
             }
         });
 
-        // TODO:테이블에서 발생하는 click event 처리를 위한 listener 등록
-        // END:
+        // @@TODOBLOCK:테이블에서 발생하는 click event 처리를 위한 listener 등록
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table.getSelectedRow();
+                String nm = model.getValueAt(row, 1).toString();
+                JOptionPane.showMessageDialog(BoxOfficeUi.this, "선택된 요소: " +nm);
+            }
+        });
+        // @@END:
     }
 
 }

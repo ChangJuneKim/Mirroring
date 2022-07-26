@@ -1,11 +1,11 @@
 package com.ssafy.live2.modifier;
 
-// TODO: 1. String class를 상속받아보고 오류를 파악해보자.
+// @@TODOINLINE: 1. String class를 상속받아보고 오류를 파악해보자.
 
 public class FinalTest {
-    // TODO: 2. PerfectMember를 상속받아 perfectMethod를 재정의해보고 오류를 파악해보자.
+    // @@TODOINLINE: 2. PerfectMember를 상속받아 perfectMethod를 재정의해보고 오류를 파악해보자.
 
-    // TODO: 3. printGugu 메서드의 오류를 확인하고 대책을 수립하시오.
+    // @@TODOINLINE: 3. printGugu 메서드의 오류를 확인하고 대책을 수립하시오.
     public void printGugu(int dan) {
         if (dan > 9) {
             return;
@@ -14,7 +14,8 @@ public class FinalTest {
             System.out.print(dan * i + "\t");
         }
         System.out.println();
-         printGugu(dan++);
+        // @@REPLACE: printGugu(dan++);
+        printGugu(dan+1);
     }
     
     public static void main(String[] args) {

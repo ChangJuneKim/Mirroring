@@ -11,10 +11,7 @@ public class ArrayTest_06 {
 
         String[] strs = {"S", "S", "A", "F", "Y"};
 
-//        boolean[] bools;
-//        bools={true,false,false}; // 선언과 생성을 따로 처리할 경우 컴파일 오류가 일어남
-        
-        boolean[] bools2;
-        bools2 = new boolean[] {true, false, false};
+        boolean[] bools;
+        bools = new boolean[] {true, false, false};
     }
 }

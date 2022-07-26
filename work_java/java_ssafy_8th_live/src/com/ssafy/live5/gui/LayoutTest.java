@@ -44,15 +44,54 @@ public class LayoutTest extends JFrame {
     }
     
     private void makeResultPanel() {
-        // TODO: 결과를 보여줄 panel을 구성하시오.
-        // END:
+        // @@TODOBLOCK: 결과를 보여줄 panel을 구성하시오.
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("정답 개수: "));
+        lCorrectCnt = new JLabel("0");
+        panel.add(lCorrectCnt);
+        panel.add(new JLabel("오답 개수: "));
+        lWrongCnt = new JLabel("0");
+        panel.add(lWrongCnt);
+        this.add(panel, BorderLayout.SOUTH);
+        // @@END:
     }
 
 
     
     private void makeProblemPanel() {
-        // TODO: 문제를 출제할 패널을 구성하시오.
-        // END:
+        // @@TODOBLOCK: 문제를 출제할 패널을 구성하시오.
+        JPanel panel = new JPanel();
+        lNum1 = new JLabel();
+        lNum2 = new JLabel();
+        tfAns = new JTextField(10);
+        panel.add(lNum1);
+        panel.add(new JLabel("*"));
+        panel.add(lNum2);
+        panel.add(new JLabel("="));
+        panel.add(tfAns);
+        tfAns.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    try {
+                        int val = Integer.parseInt(tfAns.getText());
+                        if (val == answer) {
+                            lCorrectCnt.setText(Integer.parseInt(lCorrectCnt.getText())+1 + "");
+                        } else {
+                            lWrongCnt.setText(Integer.parseInt(lWrongCnt.getText() )+1 + "");
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        lWrongCnt.setText(Integer.parseInt(lWrongCnt.getText())+1 + "");
+                    } finally {
+                        makeProblem();
+                    }
+                }
+            }
+        });
+        makeProblem();
+        this.add(panel, BorderLayout.CENTER);
+        // @@END:
     }
 
 

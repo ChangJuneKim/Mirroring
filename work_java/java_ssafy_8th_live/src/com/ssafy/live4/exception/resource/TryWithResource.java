@@ -32,7 +32,13 @@ public class TryWithResource {
     }
 
     public void useStreamNewStye() {
-        // TODO: useStream을 try~with~resource 문장으로 변경하세요.
-        // END:
+        // @@TODOBLOCK: useStream을 try~with~resource 문장으로 변경하세요.
+        try (FileInputStream fileInput = new FileInputStream("abc.txt")) {
+            System.out.println("FileInputStream이 생성되었습니다.");
+            fileInput.read();
+        } catch (IOException e) {
+            System.out.println("파일 처리 실패");
+        }
+        // @@END:
     }
 }

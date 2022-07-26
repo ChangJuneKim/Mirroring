@@ -1,17 +1,34 @@
 package com.ssafy.live2.modifier.singleton;
 
 class SingletonClass{
-    // TODO:SingletonClass에 Singleton Design Pattern을 적용하시오.
-    // END:
-    public void sayHello() {
-      System.out.println("Hello");
-    }
-    
-  }
+	// @@TODOBLOCK:SingletonClass에 Singleton Design Pattern을 적용하시오.
+	private static SingletonClass instance;
+	
+	private SingletonClass() {}
 
-  public class SingletonTest {
-    public static void main(String[] args) {
-      // TODO:SingletonClass를 사용해보세요.  
-      // END:
-    }
-  }
+	public static SingletonClass getInstance() {
+		if (instance == null) {
+			instance = new SingletonClass();
+		}
+		return instance;
+	}
+	
+	// @@END:
+	public void sayHello() {
+		System.out.println("Hello");
+	}
+
+}
+
+public class SingletonTest {
+	
+	public static void main(String[] args) {
+		// @@TODOBLOCK:SingletonClass를 사용해보세요.  
+		SingletonClass sc1 = SingletonClass.getInstance();
+		SingletonClass sc2 = SingletonClass.getInstance();
+
+		System.out.printf("두 객체는 같은가? %b%n", sc1==sc2);
+		sc1.sayHello();
+		// @@END:
+	}
+}

@@ -23,19 +23,32 @@ public class MapTest {
     }
 
     private void retrieveMethod() {
-        // TODO: kate의 전화번호가 있나요?
-        // END:
+        // @@TODOBLOCK: kate의 전화번호가 있나요?
+        System.out.println("kate의 전화번호가 있는가? " + hMap.containsKey("kate"));
+        // @@END:
 
-        // TODO: map이 가지고 있는 key와 거기에 연결된 value를 출력하시오.
-        // END:
+        // @@TODOBLOCK: map이 가지고 있는 key와 거기에 연결된 value를 출력하시오.
+        Set<String> keys = hMap.keySet();
+        for (String key : keys) {
+            System.out.printf("key: %s, value: %s%n", key, hMap.get(key));
+        }
+        // @@END:
 
-        // TODO: 값이 4567인 사람의 이름은?
-        // END:
+        // @@TODOBLOCK: 값이 4567인 사람의 이름은?
+        Set<Map.Entry<String, String>> entrySet = hMap.entrySet();
+        for (Map.Entry<String, String> entry : entrySet) {
+            if (entry.getValue().equals("4567")) {
+                System.out.printf("번호가 4567인 사람 찾음: %n", entry.getKey());
+            }
+        }
+        // @@END:
     }
 
     private void removeMethod() {
-        // TODO: andy의 자료를 삭제하고 출력하시오.
-        // END:
+        // @@TODOBLOCK: andy의 자료를 삭제하고 출력하시오.
+        hMap.remove("andy");
+        System.out.println(hMap);
+        // @@END:
     }
 
     public static void main(String[] args) {

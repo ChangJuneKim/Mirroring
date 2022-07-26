@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
+//@@REPLACE:
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BoxOffice {
     private Integer rank; // 등수
     private String movieNm; // 영화제목
@@ -46,8 +47,15 @@ public class BoxOffice {
 
     public Date toDate(String date) {
         Date dateObj = null;
-        // TODO: 문자열 형태의 날짜를 Date로 변환해서 반환하시오.
-        // END:
+        // @@TODOBLOCK: 문자열 형태의 날짜를 Date로 변환해서 반환하시오.
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dateObj = format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            dateObj = new Date();
+        }
+        // @@END:
         return dateObj;
     }
 

@@ -7,28 +7,20 @@ public class ArrayTest_11 {
 
 		// TODO: 위 배열의 요소 중 평균(실수, 소숫점 세째에서 반올림 출력)과 절대값 기준으로
 		//  평균에서 가장 거리가 먼 값을 출력하시오.(여러 개일 경우는 하나만)
-		// END: 
-		double sum = 0;
+		int sum = 0;
 
-		// 합 구하기
-		for (double num : intArray) {
+		for (int num : intArray) {
 			sum += num;
 		}
-		
-		// 평균 구하기
-		double avg = sum / intArray.length;
-		
-		// 최댓값 최솟값 설정하기
+
+		double avg = 1.0 * sum / intArray.length;
+
 		double max = Double.MIN_VALUE;
 		double min = Double.MAX_VALUE;
-		
-		// 최댓값과 최솟값의 인덱스
 		int maxIdx = -1;
 		int minIdx = -1;
 
-		
 		for (int i = 0; i < intArray.length; i++) {
-			// 절댓값 기준으로 
 			if (Math.abs(intArray[i] - avg) > max) {
 				max = Math.abs(intArray[i] - avg);
 				maxIdx = i;
@@ -39,13 +31,8 @@ public class ArrayTest_11 {
 				minIdx = i;
 			}
 		}
-		
-		System.out.println(max);
-		System.out.println(min);
-
-		// @@END:
+		// END:
 		System.out.printf("avg:%.2f, maxDiff: %d, minDiff:%d%n", avg, intArray[maxIdx], intArray[minIdx]);
-
 
 	}
 }

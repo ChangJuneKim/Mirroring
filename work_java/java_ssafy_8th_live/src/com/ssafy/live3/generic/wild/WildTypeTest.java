@@ -15,7 +15,7 @@ public class WildTypeTest {
         // Person 또는 상속받은 경우만 받아줄 수 있다.
         PersonBox<? extends Person> pChildPer = pPer;
         pChildPer = pSpi;
-        // pChildPer = pObj;
+        pChildPer = pObj;
 
         // Person 또는 조상만 받아줄 수 있다.
         PersonBox<? super Person> pSuperPer = pPer;
