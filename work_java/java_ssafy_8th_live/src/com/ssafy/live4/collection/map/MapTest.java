@@ -6,7 +6,7 @@ import java.util.Set;
 
 
 public class MapTest {
-    Map<String, String> hMap = new HashMap<>();
+    Map<String, String> hMap = new HashMap<>(); // 해쉬맵을 생성할때 Key : String , Value : String 을 제네릭으로 타입 확정을 해줘야한다
 
     private void addMethod() {
         System.out.println("추가 성공?: " + hMap.put("andy", "1234"));
