@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -25,10 +26,59 @@ public class BoxOfficeSaxParser extends DefaultHandler {
 
     public List<BoxOffice> getBoxOffice() {
         // TODO: SAXParser를 구성하고 boxoffice.xml을 파싱하시오.
+    	SAXParserFactory factory = SAXParserFactory.newInstance();
+    	try {
+    		SAXParser parser = factory.newSAXParser();
+    		parser.parse(xml, this);
+		} catch ( SAXException | ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         // END:
         return list;
     }
     
     // TODO: 필요한 매서드를 재정의 하여 boxOffice.xml을 파싱하시오.
+    @Override
+    public void startDocument() throws SAXException {
+    	System.out.println("문서 읽기 시작");
+    }
+    
+    @Override
+    public void endDocument() throws SAXException {
+    	System.out.println("문서 읽기 완료");
+    
+    }
+    
+    @Override
+    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    	if(qName.equals("dailyBoxOffice")) {
+    		current = new BoxOffice();
+    	}
+    }
+    
+    @Override
+    public void endElement(String uri, String localName, String qName) throws SAXException {
+    	if(qName.equals("rank")) {
+    		current.setRank(Integer.valueOf(this.content));
+    	} else if(qName.equals("movieNm")) {
+    		current.setMovieNm(this.content);
+    	} else if(qName.equals("openDt")) {
+    		current.setOpenDt(current.toDate(this.content));
+    	} else if(qName.equals("audiAcc")) {
+    		current.setAudiAcc(Integer.valueOf(this.content));
+    	} else if(qName.equals("dailyBoxOffice")) {
+    		list.add(current);
+    		current = null;
+    	}
+    }
+    
+    @Override
+    public void characters(char[] ch, int start, int length) throws SAXException {
+    	this.content = new String(ch, start, length);
+    }
+    
     // END:
 }
