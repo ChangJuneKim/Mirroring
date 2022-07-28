@@ -6,7 +6,7 @@ import java.util.Set;
 
 
 public class MapTest {
-    Map<String, String> hMap = new HashMap<>(); // 해쉬맵을 생성할때 Key : String , Value : String 을 제네릭으로 타입 확정을 해줘야한다
+    Map<String, String> hMap = new HashMap<>();
 
     private void addMethod() {
         System.out.println("추가 성공?: " + hMap.put("andy", "1234"));
@@ -23,32 +23,19 @@ public class MapTest {
     }
 
     private void retrieveMethod() {
-        // @@TODOBLOCK: kate의 전화번호가 있나요?
-        System.out.println("kate의 전화번호가 있는가? " + hMap.containsKey("kate"));
-        // @@END:
+        // TODO: kate의 전화번호가 있나요?
+        // END:
 
-        // @@TODOBLOCK: map이 가지고 있는 key와 거기에 연결된 value를 출력하시오.
-        Set<String> keys = hMap.keySet();
-        for (String key : keys) {
-            System.out.printf("key: %s, value: %s%n", key, hMap.get(key));
-        }
-        // @@END:
+        // TODO: map이 가지고 있는 key와 거기에 연결된 value를 출력하시오.
+        // END:
 
-        // @@TODOBLOCK: 값이 4567인 사람의 이름은?
-        Set<Map.Entry<String, String>> entrySet = hMap.entrySet();
-        for (Map.Entry<String, String> entry : entrySet) {
-            if (entry.getValue().equals("4567")) {
-                System.out.printf("번호가 4567인 사람 찾음: %n", entry.getKey());
-            }
-        }
-        // @@END:
+        // TODO: 값이 4567인 사람의 이름은?
+        // END:
     }
 
     private void removeMethod() {
-        // @@TODOBLOCK: andy의 자료를 삭제하고 출력하시오.
-        hMap.remove("andy");
-        System.out.println(hMap);
-        // @@END:
+        // TODO: andy의 자료를 삭제하고 출력하시오.
+        // END:
     }
 
     public static void main(String[] args) {

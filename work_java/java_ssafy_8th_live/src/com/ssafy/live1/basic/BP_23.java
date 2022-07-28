@@ -17,7 +17,7 @@ public class BP_23 {
         for (int i = 0; i < cnt; i++) {
             sum += rand.nextInt(6) + 1;
         }
-        avg = 1.0 * sum / cnt;
+        avg = 1.0*sum/cnt;
             
         System.out.printf("sum: %d, avg: %f%n", sum, avg);
 
@@ -34,7 +34,7 @@ public class BP_23 {
             sum += rand.nextInt(6) + 1;
             i++;
         }
-        avg = 1.0 * sum / cnt;
+        avg = 1.0*sum/cnt;
 
         System.out.printf("sum: %d, avg: %f%n", sum, avg);
     }

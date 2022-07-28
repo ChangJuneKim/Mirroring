@@ -7,7 +7,7 @@ import java.util.List;
 public class ArrayVsLinkedTest {
 	private static void addTest(String testcase, List<Object> list) {
 		long start = System.nanoTime();
-		for (int i = 0; i < 1_000_000; i++) {
+		for (int i = 0; i < 1000000; i++) {
 			list.add(new String("Hello"));
 		}
 		long end = System.nanoTime();
@@ -17,7 +17,7 @@ public class ArrayVsLinkedTest {
 
 	private static void addTest2(String testcase, List<Object> list) {
 		long start = System.nanoTime();
-		for (int i = 0; i < 100_000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			list.add(0, new String("Hello"));
 		}
 		long end = System.nanoTime();
@@ -27,7 +27,7 @@ public class ArrayVsLinkedTest {
 
 	private static void accessTest(String testcase, List<Object> list) {
 		long start = System.nanoTime();
-		for (int i = 0; i < 100_000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			list.get(i);
 		}
 		long end = System.nanoTime();

@@ -1,29 +1,26 @@
-// ##DELETE_FILE:
 package com.ssafy.live2.extend.person;
 
 public class Person {
-	String name = "피터파커";
-	
-	public Person() {}
-	
-	public Person(String name) {
+	public String name = "피터 파커";
+
+	public Person(String name){
 		this.name = name;
 	}
 	
 	public void eat() {
-		System.out.println("밥 먹기");
+		System.out.println("냠냠");
 	}
-	
+
 	public void jump() {
-		System.out.println("두 다리로 폴짝!!");
+		System.out.println("두 다리로 폴짝!");
 	}
-	
+
+	// 오버로딩
 	public void jump(String option) {
-		
+		System.out.println("두 다리로 " + option + "점프");
 	}
 	
-	@Override
 	public String toString() {
-		return "person: name: " + this.name;
+		return "person :, name: " + this.name;
 	}
 }

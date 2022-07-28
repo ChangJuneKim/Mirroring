@@ -12,10 +12,8 @@ public class SetTest {
         hset.add("Hello");     
         hset.add("Hello");      // 동일한 데이터 추가 확인
         hset.add(1);            // 기본형은 wrapper를 통해 추가
-        // @@TODOBLOCK: SmartPhone 타입의 객체를 추가해보자.
-        hset.add(new SmartPhone("010-111-2222"));
-        hset.add(new SmartPhone("010-111-2222"));
-        // @@END:
+        // TODO: SmartPhone 타입의 객체를 추가해보자.
+        // END:
         System.out.println("데이터 추가 결과: " + hset);
     }
 

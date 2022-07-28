@@ -2,10 +2,9 @@ package com.ssafy.live5.io.process.object;
 
 import java.io.Serializable;
 
-// @@TODOINLINE: Person 을 직렬화 가능하도록 처리하시오.
-@SuppressWarnings("serial")
-// @@REPLACE:public class Person {
-public class Person implements Serializable {
+// TODO: Person 을 직렬화 가능하도록 처리하시오.
+
+public class Person implements Serializable{
     private String id;
     private transient String pass; // 민감한 데이터
     private Address addr; // has a 관계의 다른 객체
@@ -21,8 +20,7 @@ public class Person implements Serializable {
         return "[id=" + id + ", pass=" + pass + ", addr=" + addr + "]";
     }
 
-    // @@REPLACE: class Address {
-    class Address implements Serializable {
+     class Address implements Serializable{
         private String zipCode;
         private String city;
 

@@ -1,25 +1,21 @@
 package com.ssafy.offline2.classobject.person2;
 
 public class TestDrive {
-	
 	public static void main(String[] args) {
-		int a = 10;
-		Person sanghoon = new Person("정상훈", 37, "부산 강서구 명지동", "교수", "남성");
-		
-		sanghoon.walk();
-		sanghoon.run();
-		sanghoon.eat();
-		
-		sanghoon.introduce();
-		System.out.println(sanghoon.toString());
-		
-		Person bokyung = new Person("김보경", 26, "하단", "교육생", "남성");
-		
+		Person changjune = new Person("김창준", 29, "무직", "그린코아", "M");
+
+//		changjune.walk();
+//		changjune.run();
+//		changjune.eat();
+//		changjune.introduce();
+		System.out.println(changjune);
+//		System.out.println(changjune.toString());
+		Person bokyung = new Person("보경", 26, "부반장", "하단", "M");
+
 		bokyung.walk();
 		bokyung.run();
 		bokyung.eat();
-		
 		bokyung.introduce();
-		System.out.println(bokyung);
 	}
+
 }

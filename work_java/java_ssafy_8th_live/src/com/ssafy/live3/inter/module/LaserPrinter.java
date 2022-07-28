@@ -1,11 +1,8 @@
-// ##DELETE_FILE:
 package com.ssafy.live3.inter.module;
 
 public class LaserPrinter implements Printer{
-
-    @Override
+	@Override
     public void print(String fileName) {
-        System.out.printf("레이저 프린터로 프린트한다.");
+        System.out.println("Lazer Printer로 프린트 한다.");
     }
-
 }

@@ -21,28 +21,28 @@ public class NodeDiaryTest {
         	
             System.out.println("일기를 작성합니다. 그만두려면 x를 입력하세요.");
             writer.write("\n오늘 날짜: - " + new Date() + "\n");
-            // @@TODOBLOCK: Scanner를 통해서 읽은 내용을 writer를 통해서 파일에 출력하시오.
-            String str = null;
-            while (true) {
-                str = scanner.nextLine();
-                if (str.equals("x")) {
-                    break;
-                } else {
-                    writer.write(str + "\n");
-                }
+            // TODO: Scanner를 통해서 읽은 내용을 writer를 통해서 파일에 출력하시오.
+            
+            while(true) {
+            	String line = scanner.nextLine();
+            	if(line.equals("x")) {
+            		break;
+            	}else {
+            		writer.write(line + "\n"); // 스캐너가 개행문자를 빼고 읽어오기 때문
+            	}
             }
-            writer.flush();// 버퍼의 내용을 출력하고 비움
-            // @@END:
+            // END:
             
             System.out.println("일기 저장 완료!!");
             
-            // @@TODOBLOCK: reader를 이용해 diary의 내용을 읽은 후 콘솔에 출력하시오.
+            // TODO: reader를 이용해 diary의 내용을 읽은 후 콘솔에 출력하시오.
             char[] buffer = new char[10];
             int read = -1;
-            while ((read = reader.read(buffer)) > 0) {
-                System.out.print(String.valueOf(buffer, 0, read));
+            
+            while((read = reader.read(buffer)) > 0) {
+            	System.out.print(new String(buffer, 0, read));
             }
-            // @@END:
+            // END:
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package com.ssafy.live1.array;
 
-// 2022. 07. 19 오프라인 수업 때 진행
 public class ArrayTest_19 {
 
     public static void main(String[] args) {
@@ -13,19 +12,18 @@ public class ArrayTest_19 {
 
         int sum = 0;
         // TODO: X로 표시된 항목의 좌우 숫자의 합을 구하시오.
-        for (int r = 0; r < 4; r++) {
-            for (int c = 0; c < 4; c++) {
-                if (grid[r][c] == 'X') {
-                    // 왼쪽 살펴보기
-                    if (c - 1 >= 0 && grid[r][c - 1] != 'X') {
-                        sum += grid[r][c - 1] - '0';
-                    }
-                    // 오른쪽 살펴보기
-                    if (c + 1 < 4 && grid[r][c + 1] != 'X') {
-                        sum += grid[r][c + 1] - '0';
-                    }
-                }
-            }
+        for(char[] row : grid) {
+        	for(int i = 0; i < row.length; i++) {
+        		if(row[i] == 'X') {
+        			if(i - 1 >= 0 && row[i - 1] != 'X') {
+        				sum += (row[i - 1] - '0');
+        			}
+        			if(i + 1 < row.length && row[i + 1] != 'X') {
+        				sum += (row[i + 1] - '0');
+        			}
+        		
+        		}
+        	}
         }
         // END:
         System.out.println(sum);

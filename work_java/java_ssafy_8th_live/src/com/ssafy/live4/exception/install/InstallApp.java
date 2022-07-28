@@ -9,7 +9,7 @@ public class InstallApp {
     void install() throws Exception {
         System.out.println("설치");
         if (Math.random() > 0.5) {
-        	throw new Exception();
+            throw new Exception();
         }
     }
 
