@@ -3,18 +3,13 @@ package com.ssafy.hw.problem;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
-
-import javax.print.attribute.standard.MediaSize.Other;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("input.txt"));
-		
+		System.setIn(new FileInputStream("input.txt")); // 백준 올릴 땐 주석처리 할 것
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
 		
 		int numOfSwitches = Integer.valueOf(in.readLine());
@@ -30,12 +25,12 @@ public class Main {
 		int numOfStudents = Integer.valueOf(in.readLine());
 		
 		int receivedNumber = 0;
+		
 		for (int i = 0; i < numOfStudents; i++) {
 			st = new StringTokenizer(in.readLine(), " ");
 			boolean isMale = st.nextToken().equals("1");
 		
-			if(isMale) {
-			
+			if(isMale) {	
 				// 남자
 				receivedNumber = Integer.valueOf(st.nextToken());
 				
@@ -54,10 +49,11 @@ public class Main {
 			} else if(!isMale) {
 				// 여자
 				receivedNumber = Integer.valueOf(st.nextToken()) - 1;
+				
 				int leftSideSwitch = receivedNumber - 1;  
 				int rightSideSwitch = receivedNumber + 1; 
 				
-				
+				// 1. 일단 받은 번호는 스왑해야한다
 				if(switches[receivedNumber] == 0) {
 					switches[receivedNumber] = 1;
 				} else if(switches[receivedNumber] == 1) {
@@ -65,11 +61,14 @@ public class Main {
 				}
 				
 				while(true) {
+					// 스위치 배열 범위 안쪽일때
 					if(0 <= leftSideSwitch && rightSideSwitch < switches.length) {
+						// 양쪽 스위치가 다르면 break
 						if(switches[leftSideSwitch] != switches[rightSideSwitch]) {						
 							break;
 						}
 						
+						// 2. 받은 번호의 양쪽을 한칸씩 이동하면서 스위치의 상태가 같으면 스왑을 한다.
 						if(switches[leftSideSwitch] == switches[rightSideSwitch]) {
 							if(switches[leftSideSwitch] == 0) {
 								switches[leftSideSwitch] = 1;
@@ -84,10 +83,8 @@ public class Main {
 							}
 						}
 					}else break;
-				}
-				
+				}		
 			}
-			
 		}
 		for (int i = 1; i <= switches.length; i++) {
 			System.out.print(switches[i - 1] + " ");
