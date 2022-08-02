@@ -3,6 +3,7 @@ package com.ssafy.hw.problem;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -18,6 +19,7 @@ public class Main {
 		
 		// 스위치 입력받기
 		int[] switches = new int[numOfSwitches];
+//		int[] switches = new int[st.countTokens()];
 		for (int i = 0; i < switches.length; i++) {
 			switches[i] = Integer.valueOf(st.nextToken());
 		}

@@ -2,7 +2,6 @@ package com.ssafy.hw.step2;
 
 //사용자 정의 예외 클래스
 public class NameNotFoundException extends Exception {
-	
 	private String name;
 	
 	public NameNotFoundException(String name) {

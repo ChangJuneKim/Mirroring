@@ -98,8 +98,7 @@ public class UserManagerImpl implements IUserManager {
 		for (int i = 0; i < userList.size(); i++) {
 			sum += userList.get(i).getAge();
 		}
-
-		return sum / userList.size();
+		return (double)sum / userList.size();
 
 	}
 
