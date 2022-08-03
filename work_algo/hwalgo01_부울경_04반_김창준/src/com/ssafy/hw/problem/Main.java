@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-
+	
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("input.txt")); // 백준 올릴 땐 주석처리 할 것
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
