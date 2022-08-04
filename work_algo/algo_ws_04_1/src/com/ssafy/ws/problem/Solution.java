@@ -24,7 +24,7 @@ public class Solution {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder("");
 
-		for (int testCase = 1; testCase <= 10; testCase++) {
+		for (int testCase = 1; testCase <= 11; testCase++) {
 
 			int N = Integer.valueOf(br.readLine());
 			String brackets = br.readLine();
