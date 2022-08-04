@@ -19,8 +19,6 @@ public class Main {
 			queue.add(i);
 		}
 		
-		
-
 		while(queue.size() > 1) {
 			queue.poll(); // 하나 버리고
 			queue.add(queue.poll()); // 위에꺼 꺼내서 뒤에 추가하고
