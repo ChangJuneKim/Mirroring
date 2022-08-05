@@ -23,7 +23,6 @@ public class Main {
 			queue.poll(); // 하나 버리고
 			queue.add(queue.poll()); // 위에꺼 꺼내서 뒤에 추가하고
 		}
-		
 		System.out.println(queue.peek());
 	}
 
