@@ -31,25 +31,27 @@ public class Main {
 		
 		int N = Integer.valueOf(br.readLine());
 		
-		Stack<Tower> stack = new Stack<>();
-		Tower[] towers = new Tower[N];
+		Stack<int[]> top = new Stack<>(); //Stack에 int형 배열 저장 가능!!
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < N; i++) {
-			towers[i] = new Tower(i + 1, Integer.valueOf(st.nextToken()));
+
+		for(int i=0; i<N; i++) {
+			int n = Integer.parseInt(st.nextToken());
 			
-			if(stack.size() == 0) {
-				stack.push(towers[i]);
-				sb.append(0 + " ");
-				
-			} else if(stack.size() > 0 && stack.peek().height < towers[i].height) {
-				stack.pop();
-			} else if(stack.size() > 0 && stack.peek().height > towers[i].height) {
-				sb.append(stack.peek().number + " ");
-				stack.push(towers[i]);
+			while(!top.isEmpty()) {
+				if(top.peek()[0] < n) 
+					top.pop();
+				else { 
+					System.out.print(top.peek()[1] + " ");
+					break;
+				}
 			}
 			
+			if(top.empty()) //탑이 비었다면 0을 출력한다.
+				System.out.print("0 ");
+			top.push(new int[] {n, i+1}); //탑의 높이와 탑의 번호 배열을 저장
 		}
-		System.out.println(sb);
+			
+	
 	}
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
