@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
-
-import javax.swing.text.DefaultEditorKit.CutAction;
 
 public class Main {
 
@@ -72,7 +69,6 @@ public class Main {
 			}
 			// 0 0 0 1
 //			System.out.println(Arrays.toString(ACGTcounts));
-			// S 9  P 8
 			if(dnaString.charAt(P + i) == 'A') {
 				ACGTcounts[0]--;
 			} else if (dnaString.charAt(P + i) == 'C') {
