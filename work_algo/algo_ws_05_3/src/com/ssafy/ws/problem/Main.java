@@ -8,21 +8,6 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
-	public class Tower {
-		int number;
-		int height;
-		public Tower(int number, int height) {
-			super();
-			this.number = number;
-			this.height = height;
-		}
-		@Override
-		public String toString() {
-			return "Tower [number=" + number + ", height=" + height + "]";
-		}
-		
-		
-	}
 	
 	public void solution() throws NumberFormatException, IOException {
 		System.setIn(new FileInputStream("input.txt"));
