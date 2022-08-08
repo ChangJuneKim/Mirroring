@@ -1,5 +1,8 @@
+package com.ssafy.hw.problem;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+//import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class Solution {
@@ -9,7 +12,8 @@ public class Solution {
 	int max;
 
 	public void solution() throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new FileReader("input.txt"));
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int TC = Integer.valueOf(br.readLine());
 
