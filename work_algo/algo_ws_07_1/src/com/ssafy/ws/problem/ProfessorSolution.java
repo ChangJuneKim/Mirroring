@@ -18,7 +18,7 @@ public class ProfessorSolution {
 			int N = Integer.valueOf(br.readLine());
 
 			int answer = 1;
-
+			
 			for (int i = 1; i <= N; i++) {
 				String[] split = br.readLine().split(" ");
 				char data = split[1].charAt(0);
