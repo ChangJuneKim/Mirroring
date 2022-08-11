@@ -8,7 +8,8 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-	int max;
+	int min = Integer.MAX_VALUE;
+	int N;
 	int[][] ingredients;
 
 	public void solution() throws IOException {
@@ -17,44 +18,32 @@ public class Main {
 		StringBuilder sb = new StringBuilder("");
 		StringTokenizer st;
 
-		int T = Integer.valueOf(br.readLine());
+		N = Integer.valueOf(br.readLine());
 
-		for (int testCase = 1; testCase <= T; testCase++) {
+		ingredients = new int[N][2]; // 신맛, 쓴맛
+
+		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
-			int N = Integer.valueOf(st.nextToken()); // 재료의 수
-			int L = Integer.valueOf(st.nextToken()); // 제한 칼로리
-
-			ingredients = new int[N][2]; // 점수, 칼로리
-
-			for (int i = 0; i < N; i++) {
-				st = new StringTokenizer(br.readLine());
-				ingredients[i][0] = Integer.valueOf(st.nextToken());
-				ingredients[i][1] = Integer.valueOf(st.nextToken());
-			}
-
-			max = Integer.MIN_VALUE;
-			subset(0, 0, 0, N, L);
-
-			sb.append("#").append(testCase).append(" ").append(max).append("\n");
+			ingredients[i][0] = Integer.valueOf(st.nextToken());
+			ingredients[i][1] = Integer.valueOf(st.nextToken());
 		}
+
+		subset(0, 0, 1, 0);
+		sb.append(min).append("\n");
+
 		System.out.println(sb);
 	}
 
-	public void subset(int depth, int score, int calorie, int N, int L) {
-		if (calorie > L) {
-			return;
-		}
-
-		if (calorie <= L) {
-			max = Math.max(max, score);
-		}
-		
+	public void subset(int depth, int count, int totalCitrus, int totalBitter) {
 		if (depth == N) {
+			if (count != 0) {
+				min = Math.min(min, Math.abs(totalCitrus - totalBitter));
+			}
 			return;
 		}
 
-		subset(depth + 1, score + ingredients[depth][0], calorie + ingredients[depth][1], N, L);
-		subset(depth + 1, score, calorie, N, L);
+		subset(depth + 1, count, totalCitrus, totalBitter);
+		subset(depth + 1, count + 1, totalCitrus * ingredients[depth][0], totalBitter + ingredients[depth][1]);
 	}
 
 	public static void main(String[] args) throws IOException {
