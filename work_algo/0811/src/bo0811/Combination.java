@@ -16,7 +16,8 @@ public class Combination {
 	public void solution() {
 		R = 3; // 뽑을 개수
 		nums = new int[R]; // 내 결과
-
+		visited = new boolean[N];
+		
 		ncr(0, 0);
 		System.out.println(count);
 	}
@@ -29,14 +30,14 @@ public class Combination {
 		}
 		
 		for (int i = start; i < N; i++) {
-			if(visited[i]) {
-				continue;
-			}
-			visited[i] = true; // <- 선택한건 누구고 선택 안한건 누구다 라는걸 알 수 있음 visited가 있으면
+//			if(visited[i]) {
+//				continue;
+//			}
+//			visited[i] = true; // <- 선택한건 누구고 선택 안한건 누구다 라는걸 알 수 있음 visited가 있으면
 			nums[depth] = p[i];
 			ncr(depth + 1, i+1);
-			nums[depth] = 0;
-			visited[i] = false;
+//			nums[depth] = 0;
+//			visited[i] = false;
 		}
 	}
 
