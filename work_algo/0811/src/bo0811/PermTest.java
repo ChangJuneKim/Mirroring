@@ -6,7 +6,7 @@ import java.util.Arrays;
 // 재귀
 public class PermTest {
 
-	int[] p = { 1, 2, 3, 4, 5 };
+	int[] p = { 1, 2, 3, 4 };
 	int N = p.length;
 	int R;
 	int count;
@@ -14,7 +14,7 @@ public class PermTest {
 	boolean[] visited;
 
 	public void solution() {
-		R = 3; // 뽑을 개수
+		R = 4; // 뽑을 개수
 		nums = new int[R]; // 내 결과
 		visited = new boolean[N];
 
