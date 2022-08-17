@@ -34,8 +34,7 @@ public class Solution {
 		public String toString() {
 			return "Index [x=" + x + ", y=" + y + "]";
 		}
-		
-		
+
 	}
 
 	// Battery Charger
@@ -103,13 +102,12 @@ public class Solution {
 			}
 
 			int sum = 0;
-			
+
 			// (0, 0) 에서도 체크 해야한다!
 			for (int i = 0; i <= m; i++) {
 				A.setIndex(moveA[i]); // A, B 이동(방향)
 				B.setIndex(moveB[i]);
-				
-				System.out.println(A + " " +  B);
+
 				boolean[][] check = new boolean[2][a];
 				// 범위 안에 들어오는지 체크
 				for (int j = 0; j < a; j++) {
@@ -121,12 +119,7 @@ public class Solution {
 						check[1][j] = true;
 					}
 				}
-				
-				for (int j = 0; j < check.length; j++) {
-					System.out.println(Arrays.toString(check[j]));
-				}
-				System.out.println();
-				
+
 				sum += getMax(check);
 			}
 
