@@ -41,9 +41,6 @@ public class Main {
 		map[x][y] = 'o';
 
 		if (y == C - 1) {
-//			for (int i = 0; i < map.length; i++) {
-//				System.out.println(Arrays.toString(map[i]));
-//			}
 			return true;
 		}
 
@@ -64,7 +61,7 @@ public class Main {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
