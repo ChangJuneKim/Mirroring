@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -46,48 +47,53 @@ public class Main {
 			System.arraycopy(map[i], 0, newMap[i], 0, M);
 		}
 
-		while (castle > 0) { // 모든 궁수가 예외가 될 때까지
+		while (castle > 0) { // castle이 0보다 클때까지(한 턴이 지날때 마다 성벽 라인을 한줄씩 올림)
 			
-			ArrayList<Integer[]> enemy = new ArrayList<>(); // 공격할 적이 들어가는 배열
+			ArrayList<int[]> enemy = new ArrayList<>(); // 공격할 적이 들어가는 배열
 			
-			for (int k = 0; k < archer.length; k++) { // 모든 궁수는 가장 가까운 적을 찾는다
+			for (int i = 0; i < 3; i++) { // 모든 궁수는 가장 가까운 적을 찾는다
 				
 				int min = Integer.MAX_VALUE;
 				int[] near = new int[2]; // 현재 궁수에서 가장 가까운 적의 위치 담는 배열
 				
 				for (int j = 0; j < M; j++) {
-					for (int i = castle - 1; i >= 0; i--) {
-						int diff = Math.abs(castle - i) + Math.abs(archer[k] - j);// 적과의 거리(맨하탄 거리)
-
-						if (newMap[i][j] == 1 && diff <= D) { // 공격할 수 있는 거리에 적이 있다면
-							if (diff < min) { // 새로운 적이 더 가까이 있다면 거리와 위치 갱신
-								min = diff;
-								near[0] = i;
+					for (int k = castle - 1; k >= 0; k--) {
+						int distance = Math.abs(castle - k) + Math.abs(archer[i] - j);// 적과의 거리(맨하탄 거리)
+						
+						if (newMap[k][j] == 1 && distance <= D) { // 공격할 수 있는 거리에 적이 있다면
+							if (distance < min) { // 새로운 적이 더 가까이 있다면 거리와 위치 갱신
+								min = distance;
+								near[0] = k;
 								near[1] = j;
 							}
 							break;
 						}
 					}
 				}
+				
 				if (min != Integer.MAX_VALUE) { // 만약 공격할 수 있는 적이 있다면 enemy에 추가
-					enemy.add(new Integer[] { near[0], near[1] });
+					enemy.add(new int[] { near[0], near[1] });
 				}
 			}
+			
 			for (int i = 0; i < enemy.size(); i++) { // 모든 궁수가 공격할 수 있는 enemy배열
-				if (newMap[enemy.get(i)[0]][enemy.get(i)[1]] != 0) { // 중복되는 적은 0처리해준다.
+				int x = enemy.get(i)[0];
+				int y = enemy.get(i)[1];
+				
+				if (newMap[x][y] != 0) { // 중복되는 적은 0처리해준다.
 					temp += 1;
-					newMap[enemy.get(i)[0]][enemy.get(i)[1]] = 0;
+					newMap[x][y] = 0;
 				}
 			}
-			castle -= 1; // 성이 위로 올라감
-
+			castle -= 1; // 성을 위로 한칸 밀어 올린다
 		}
 
-		if (temp > ans)
-			ans = temp; // 전체 적의 수 갱신
+		if (temp > ans) {
+			ans = temp; // 전체 적의 수 갱신			
+		}
 	}
 
-	// 궁수를 놓을 수 있는 경우의 수
+	// 궁수 배치 조합
 	private void combination(int cnt, int start) {
 		if (cnt == 3) {
 			attack();
