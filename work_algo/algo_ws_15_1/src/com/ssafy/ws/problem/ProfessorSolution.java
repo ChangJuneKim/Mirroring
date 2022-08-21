@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Queue;
 
 public class ProfessorSolution {
@@ -41,6 +42,8 @@ public class ProfessorSolution {
 
 			edgeList[i] = new Edge(from, to);
 		}
+		
+		System.out.println(Arrays.toString(edgeList));
 
 		/**
 		 * 2. 알고리즘 풀기
