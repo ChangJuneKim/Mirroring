@@ -7,7 +7,8 @@ import java.util.StringTokenizer;
 
 public class KruskalTest {
 	static class Edge implements Comparable<Edge> {
-		int from, to, weight;
+		int from, to;
+		long weight;
 
 		public Edge(int from, int to, int weight) {
 			super();
@@ -19,7 +20,7 @@ public class KruskalTest {
 		@Override
 		public int compareTo(Edge o) {
 //			return Integer.compare(this.weight, o.weight);
-			return this.weight - o.weight;
+			return (int) (this.weight - o.weight);
 		}
 
 	}
@@ -28,9 +29,9 @@ public class KruskalTest {
 	static int V, E;
 	static Edge[] edgeList;
 
-	static void make() { // 크기가 1인 서로소 집합 생성
-		parents = new int[V];
-		for (int i = 0; i < V; i++) { // 모든 노드가 자신을 부모로하는 (대표자) 집합으로 만듦
+	static void make(int V) { // 크기가 1인 서로소 집합 생성
+		parents = new int[V + 1];
+		for (int i = 1; i < V + 1; i++) { // 모든 노드가 자신을 부모로하는 (대표자) 집합으로 만듦
 			parents[i] = i;
 		}
 	}
@@ -40,10 +41,7 @@ public class KruskalTest {
 			return a;
 		}
 
-		parents[a] = find(parents[a]); // 우리의 대표자를 나의 부모로.. path compression
-
-		return parents[a];
-
+		return parents[a] = find(parents[a]); // 우리의 대표자를 나의 부모로.. path compression;
 	}
 
 	static boolean union(int a, int b) { // 리턴 값 : true ==> union 성공
@@ -61,35 +59,41 @@ public class KruskalTest {
 	public static void main(String[] args) throws IOException {
 		System.setIn(new FileInputStream("input2.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		int T = Integer.valueOf(br.readLine());
 
-		V = Integer.valueOf(st.nextToken());
-		E = Integer.valueOf(st.nextToken());
+		for (int testCase = 1; testCase <= T; testCase++) {
+			String[] split = br.readLine().split(" ");
+			V = Integer.valueOf(split[0]);
+			E = Integer.valueOf(split[1]);
 
-		edgeList = new Edge[E];
+			edgeList = new Edge[E];
 
-		for (int i = 0; i < E; i++) {
-			st = new StringTokenizer(br.readLine());
-			edgeList[i] = new Edge(
-					Integer.valueOf(st.nextToken()),
-					Integer.valueOf(st.nextToken()),
-					Integer.valueOf(st.nextToken())
-					);
-		}
-		
-		make();
-		Arrays.sort(edgeList);
-		
-		int result = 0;
-		int count = 0;
-		for (Edge edge : edgeList) {
-			if(union(edge.from, edge.to)) {
-				count++;
-				result += edge.weight;
-				if(count == V - 1) break;
+			for (int i = 0; i < E; i++) {
+				split = br.readLine().split(" ");
+				
+				int a = Integer.parseInt(split[0]);
+				int b = Integer.parseInt(split[1]);
+				int c = Integer.parseInt(split[2]);
+				edgeList[i] = new Edge(a, b, c);
 			}
+
+			make(V);
+			Arrays.sort(edgeList);
+
+			long result = 0;
+			long count = 0;
+			for (Edge edge : edgeList) {
+				if (union(edge.from, edge.to)) {
+					count++;
+					result += edge.weight;
+					if (count == V - 1)
+						break;
+				}
+			}
+			sb.append("#").append(testCase).append(" ").append(result).append("\n");
 		}
-		
-		System.out.println(result + " " + count);
+		System.out.println(sb);
+
 	}
 }
