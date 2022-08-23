@@ -26,12 +26,8 @@ public class Solution {
 			int N = Integer.parseInt(st.nextToken());
 			int M = Integer.parseInt(st.nextToken());
 
-//			graph = new ArrayList<ArrayList<Integer>>();
 			parents = new int[N + 1];
 			Arrays.fill(parents, 1, N + 1, -1);
-//			for (int i = 0; i < N + 1; i++) {
-//				graph.add(new ArrayList<Integer>());
-//			}
 
 			for (int i = 0; i < M; i++) {
 				st = new StringTokenizer(br.readLine());
@@ -39,14 +35,11 @@ public class Solution {
 				int to = Integer.parseInt(st.nextToken());
 
 				merge(from, to);
-//				graph.get(from)
-//						.add(to);
-//
-//				graph.get(to)
-//						.add(from);
 			}
 
 			int count = 0;
+//			System.out.println(Arrays.toString(parents));
+
 			for (int i = 0; i < parents.length; i++) {
 				if (parents[i] < 0) {
 					count++;
@@ -63,32 +56,32 @@ public class Solution {
 
 	}
 
-	private boolean merge(int a, int b) {
-		int pA = find(a);
-		int pB = find(b);
-
-		if (pA == pB) { // 부모가 같다면 union 할 수 없다
+	private boolean merge(int num1, int num2) { // 유니온 Union
+		// 각각 번호의 대표를 찾는다.
+		int rootA = find(num1);
+		int rootB = find(num2);
+		// 대표가 같으면 유니온 하지 않는다.
+		if (rootA == rootB) {
 			return false;
 		}
 
-		int temp = parents[pA] + parents[pB]; // 합친 가족 수 temp
-
-		if (parents[pA] > parents[pB]) {
-			parents[pA] = pB;
-			parents[pB] = temp;
-		} else {
-			parents[pB] = pA;
-			parents[pA] = temp;
+		int temp = parents[rootA] + parents[rootB]; // union 됐을 때 두 그룹 구성원의 합
+		// rootA의 구성원 수가 더 작으면
+		if (parents[rootA] > parents[rootB]) {
+			parents[rootB] = temp; // 구성원이 더 많은 B에 구성원을 합치고
+			parents[rootA] = rootB; // A는 B를 가리킨다
+		} else { // rootA의 구성원 수가 같거나 더 크면
+			parents[rootA] = temp; // 구성원이 더 많은 A에 구성원을 합치고
+			parents[rootB] = rootA; // B는 A를 가리킨다
 		}
-
 		return true;
 	}
 
-	private int find(int i) {
-		if (parents[i] < 0) { // 음수이면 그게 대장
-			return i;
+	private int find(int number) { // Find
+		if (parents[number] < 0) { // 음수이면 그게 대장
+			return number;
 		}
-		return parents[i] = find(parents[i]);
+		return parents[number] = find(parents[number]);
 	}
 
 	public static void main(String[] args) throws IOException {
