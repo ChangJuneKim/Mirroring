@@ -65,9 +65,10 @@ public class Main {
 
 			if (!visited[neighbor]) {
 				dfs(neighbor, count + 1);
-				visited[neighbor] = false;
+				;
 			}
 		}
+		visited[start] = false;
 	}
 
 	public static void main(String[] args) throws IOException {
