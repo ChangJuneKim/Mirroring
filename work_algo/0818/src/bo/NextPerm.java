@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class NextPerm {
 
 	// !! 오름차순이어야 한다!
-	static int[] p = { 6, 2, 1, 5, 4, 3, 0 };
+	static int[] p = { 1, 2, 3, 4, 5, 6, 7 };
 	static int N = p.length;
 	static int count;
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class NextComb {
 
-	static int[] p = { 0, 0, 1, 1, 1 };
+	static int[] p = { 0, 1, 1, 1, 1 };
 	static int[] A = { 1, 2, 3, 4, 5 };
 	static int N = p.length;
 	static int count;
