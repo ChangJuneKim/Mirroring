@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSAFY BOOK CAFE</title>
+</head>
+<body>
+<header>
+  <nav>
+    <span><a href="#">SSAFY</a></span>
+    <span><a href="#">BookCafe</a></span>
+    <span><a href="#">공지사항</a></span>
+    <div><a href="#">로그인</a></div>
+    <div><a href="#">회원가입</a></div>
+    <div><a href="#">로그아웃</a></div>
+    <div><a href="#">마이페이지</a></div>
+    <div><a href="#">관리자</a></div>
+  </nav>
+</header>
+<aside>
+  <!--  프로필 시작 -->
+  <section>
+    <img src="./img/noimg.png" alt="기본 프로필 이미지">
+    <img src="./img/profile.png" alt="프로필 이미지">
+  </section>
+  <!--  프로필 끝 -->
+  <!--  매장 펼치기 시작-->
+  <section>
+    <p>전국매장펼치기</p>
+    <p>전국매장접기</p>
+    <ul>
+      <li>
+        서울
+        <ul>
+          <li>역삼점</li>
+          <li>선릉점</li>
+        </ul>
+      </li>
+      <li>
+        대전
+        <ul>
+          <li>학하점</li>
+          <li>봉명점</li>
+        </ul>
+      </li>
+      <li>
+        구미
+        <ul>
+          <li>인동점</li>
+          <li>공단점</li>
+        </ul>
+      </li>
+      <li>
+        광주
+        <ul>
+          <li>하남산단점</li>
+          <li>광주역점</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <!--  매장 펼치기 끝-->
+  <!--  투표 시작-->
+  <section>
+    <p>[ 당신의 선택 ]</p>
+    <p>공부하고 싶은 분야를 골라 주세요!!!</p>
+    <form action="#">
+      <ul>
+        <li>
+          <input id="python" type="radio" name="vote-language">
+          <label for="python">
+            <img src="./img/poll/python.png" alt="파이썬">
+            Python
+          </label>
+        </li>
+        <li>
+          <input id="html" type="radio" name="vote-language">
+          <label for="html">
+            <img src="./img/poll/html5.png" alt="HTML">
+            HTML5
+          </label>
+        </li>
+        <li>
+          <input id="vue" type="radio" name="vote-language">
+          <label for="vue">
+            <img src="./img/poll/vuejs.png" alt="뷰js">
+            Vue.js
+          </label>
+        </li>
+        <li>
+          <input id="java" type="radio" name="vote-language">
+          <label for="java">
+            <img src="./img/poll/java.png" alt="자바">
+            Java
+          </label>
+        </li>
+      </ul>
+      
+      <button type="submit">투표하기</button>
+      <button type="button">결과보기</button>
+      <p>투표기간 : 21.03.01 ~ 21.03.31</p>
+    </form>
+  </section>
+  <!--  투표 끝 -->
+</aside>
+
+<main>
+  <!--  메인 큰 부분 1(가로로 길게 먹음)-->
+  <section>
+    <h3>[ 프로그래밍 언어 ]</h3>
+    <ul>
+      <li>
+        <figure>
+          <img src="./img/book/p_book01.png" alt="점프 투 파이썬">
+          <figcaption>Do it! 점프 투 파이썬 (18,800원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/p_book02.png" alt="HTML5 API 프로그래밍">
+          <figcaption>HTML5 API 프로그래밍 (23,000원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/p_book03.png" alt="백견불여일타 Vue.js입문">
+          <figcaption>백견불여일타 Vue.js입문 (22,000원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/p_book04.png" alt="Java 프로그래밍">
+          <figcaption>Java 프로그래밍 (26,500원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/p_book05.png" alt="토비의 스프링 3.1">
+          <figcaption>토비의 스프링 3.1 (40,000원)</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+  
+  <!--  메인 큰 부분 2(가로로 길게 먹음)-->
+  <section>
+    <h3>[ 에세이 ]</h3>
+    <ul>
+      <li>
+        <figure>
+          <img src="./img/book/e_book01.png" alt="2인조">
+          <figcaption>2인조 (14,800원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/e_book02.png" alt="안녕, 소중한 사람">
+          <figcaption>안녕, 소중한 사람 (15,000원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/e_book03.png" alt="꽃을 보든 너를 본다">
+          <figcaption>꽃을 보든 너를 본다 (10,000원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/e_book04.png" alt="점프 투 파이썬">
+          <figcaption>곰돌이 푸, 행복한 일은 매일 있어 (12,000원)</figcaption>
+        </figure>
+      </li>
+      <li>
+        <figure>
+          <img src="./img/book/e_book05.png" alt="하마터면 열심히 살 뻔했다">
+          <figcaption>하마터면 열심히 살 뻔했다 (15,000원)</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+  
+  <!--  메인 작은 부분 1(한줄을 반반 먹음 밑에 table이랑)-->
+  <section>
+    <h3>[ 인기글 ]</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>자바공부 쉽게하는법!!</td>
+        <td>이쎄림</td>
+        <td>1756</td>
+      </tr>
+      <tr>
+        <td>알고리즘은 자바? 파이썬?</td>
+        <td>홍정밍</td>
+        <td>998</td>
+      </tr>
+      <tr>
+        <td>스프링 정복하기~</td>
+        <td>김나켠</td>
+        <td>856</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <h3>[ 최신글 ]</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>web 관련 질문있어요.</td>
+        <td>이주녕</td>
+        <td>12</td>
+      </tr>
+      <tr>
+        <td>vue.js는 이렇게 공부해보세요.</td>
+        <td>조밍기</td>
+        <td>998</td>
+      </tr>
+      <tr>
+        <td>꽃길만 걸어요.</td>
+        <td>류해면</td>
+        <td>856</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <ul>
+    <li><a href="#">카페소개</a></li>
+    <li><a href="#">개인정보처리방침</a></li>
+    <li><a href="#">이용약관</a></li>
+    <li><a href="#">오시는길</a></li>
+    <li>&copy; SSAFY Corp.</li>
+  </ul>
+</footer>
+
+</body>
+</html>
