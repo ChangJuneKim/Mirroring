@@ -5,12 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      header {
+        /* display: flex; */
+        height: 80px;
+      }
+
+      nav {
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      nav > ul {
+        display: flex;
+        list-style: none;
+      }
+    </style>
   </head>
   <body>
     <!-- 상단 Header -->
     <header>
       <nav>
-        <a href="index1.html">SSAFY Home</a>
+        <a class="logo" href="index1.html">SSAFY Home</a>
         <ul>
           <li><a href="#">1기</a></li>
           <li><a href="#">2기</a></li>
