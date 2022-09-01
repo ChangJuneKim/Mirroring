@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <title>JavaScript 선언</title>
-  <script type="text/javascript">
-    function hello(name) {
-      alert(`안녕하세요 ${name} 님!!!`);
-      console.log(name)
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>javascript 선언</title>
+  <script>
+    function helloJS(name) {
+      alert("안녕하세요 " + name + "님!!!");
+      console.log(`hello ${name}!!!`);
     }
-    
-    hello('하이쎔');
+
+    helloJS("하이쌤");  /* 효인 교수님의 효(H) 인(I)을 따서 HI 쌤이라고 합니다 */
+
+    window.onload = function () {
+      document.querySelector("#btn").addEventListener("click", function () {
+        alert("버튼 눌렀니???");
+      });
+    };
   </script>
 </head>
-<body></body>
+
+<body>
+  <button id="btn">인사</button>
+</body>
+
 </html>
