@@ -190,12 +190,6 @@ nav > a {
   padding: 10px 20px;
 }
 
-.menu ul::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
 .menu ul > li {
   float: left;
   margin: 10px;
@@ -315,4 +309,16 @@ footer > ul > li {
   content: '';
   clear: both;
   display: block;
+}
+
+.menu ul::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+footer > ul::after {
+  content: '';
+  display: block;
+  clear: both;
 }
