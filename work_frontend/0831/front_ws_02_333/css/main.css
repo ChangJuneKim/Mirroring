@@ -310,3 +310,9 @@ footer > ul > li {
   clear: both;
   display: block;
 }
+
+.article::after {
+  content: '';
+  clear: both;
+  display: block;
+}

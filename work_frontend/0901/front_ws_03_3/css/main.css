@@ -203,6 +203,12 @@ nav > a {
   display: block;
 }
 
+.article::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
 .menu ul > li {
   float: left;
   margin: 10px;
