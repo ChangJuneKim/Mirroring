@@ -14,3 +14,10 @@ footer .navbar-nav {
 footer .navbar-nav .nav-link {
   margin-right: 1rem;
 }
+
+@media (min-width: 769px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

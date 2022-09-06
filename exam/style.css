@@ -108,3 +108,8 @@ address {
   white-space: nowrap;
   border-width: 0;
 }
+
+.scroll_disable {
+  height: 100%;
+  overflow: hidden;
+}
