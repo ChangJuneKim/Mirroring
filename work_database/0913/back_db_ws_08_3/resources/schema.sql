@@ -155,7 +155,9 @@ order by CountryCode;
 
 select countrycode, name, population
 from city
-where (countrycode, population) in (select countrycode, max(population) from city group by countrycode)
+where (countrycode, population) in (select countrycode, max(population)
+									from city
+                                    group by countrycode)
 order by countrycode;
 
 #16
