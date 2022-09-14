@@ -26,9 +26,9 @@ order by name;
 #4
 select weekday('2020-05-05'),
     case
-        when weekday('2020-05-05') = 1 then '행복'
-        when weekday('2020-05-05') = 7 then '행복'
-        else '불행'
+        when weekday('2020-05-05') = 5 then '불행'
+        when weekday('2020-05-05') = 6 then '불행'
+        else '행복'
         end as '행복여부';
 
 #5
