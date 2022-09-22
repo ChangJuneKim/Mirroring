@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${requestScope.contextPath}"></c:set>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}" ></c:set>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -17,6 +17,11 @@
     <title>SSAFY</title>
   </head>
   <body>
+<c:if test="${userinfo eq null}">
+	<c:if test="${cookie.ssafy_id.value ne null}">
+		<c:set var="idck" value=" checked"></c:set>
+		<c:set var="svid" value="${cookie.ssafy_id.value}"></c:set>
+	</c:if>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
@@ -26,7 +31,7 @@
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-login" method="POST" action="">
-
+			<input type="hidden" name="act" value="login">
             <div class="form-check mb-3 float-end">
               <input
                 class="form-check-input"
@@ -34,6 +39,7 @@
                 value="ok"
                 id="saveid"
                 name="saveid"
+                ${idck}
               />
               <label class="form-check-label" for="saveid"> 아이디저장 </label>
             </div>
@@ -45,6 +51,7 @@
                 id="userid"
                 name="userid"
                 placeholder="아이디..."
+                value="${svid}"
               />
             </div>
             <div class="mb-3">
@@ -76,12 +83,12 @@
       crossorigin="anonymous"
     ></script>
     <script>
-    // 회원가입 페이지 이동
+	  // 회원가입 페이지 이동.    
       document.querySelector("#btn-mv-join").addEventListener("click", function () {
-    	location.href = "${root}/user?act=mvjoin"; // 컨트롤러 이름이 /user 구나~
+    	location.href = "${root}/user?act=mvjoin";
       });
       
-    // 로그인
+	  // 로그인
       document.querySelector("#btn-login").addEventListener("click", function () {
         if (!document.querySelector("#userid").value) {
           alert("아이디 입력!!");
@@ -96,9 +103,10 @@
         }
       });
     </script>
-    
+</c:if>
+<c:if test="${userinfo ne null}">   
     <div class="container">
-
+	  <%@ include file="/common/confirm.jsp" %>
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
@@ -106,11 +114,11 @@
           </h2>
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-          <a href="${root}/board">글쓰기</a><br />
-          <a href="${root}/board">글목록</a>
+          <a href="${root}/board?act=mvwrite">글쓰기</a><br />
+          <a href="${root}/board?act=list">글목록</a>
         </div>
       </div>
     </div>
-
+</c:if>
   </body>
 </html>
