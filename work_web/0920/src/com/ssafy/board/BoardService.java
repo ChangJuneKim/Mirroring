@@ -49,6 +49,7 @@ public class BoardService {
 		try {
 			conn = DBUtil.getConnection();
 			cnt = dao.insert(conn, board);
+			
 			conn.commit();
 		}
 		catch (SQLException | BoardException e) {
