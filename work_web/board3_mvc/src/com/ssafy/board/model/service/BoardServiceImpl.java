@@ -10,13 +10,14 @@ import com.ssafy.util.SizeConstant;
 
 public class BoardServiceImpl implements BoardService {
 	
-	private static BoardService boardService = new BoardServiceImpl();
 	private BoardDao boardDao;
 	
 	private BoardServiceImpl() {
 		boardDao = BoardDaoImpl.getBoardDao();
 	}
 
+	private static BoardService boardService = new BoardServiceImpl();
+	
 	public static BoardService getBoardService() {
 		return boardService;
 	}

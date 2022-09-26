@@ -13,13 +13,14 @@ import com.ssafy.util.DBUtil;
 
 public class BoardDaoImpl implements BoardDao {
 
-	private static BoardDao boardDao = new BoardDaoImpl();
 	private DBUtil dbUtil;
 	
 	private BoardDaoImpl() {
 		dbUtil = DBUtil.getInstance();
 	}
-
+	
+	private static BoardDao boardDao = new BoardDaoImpl();
+	
 	public static BoardDao getBoardDao() {
 		return boardDao;
 	}

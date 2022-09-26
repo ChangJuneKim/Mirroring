@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.protocol.Resultset;
 import com.ssafy.sample.dto.Person;
 import com.ssafy.sample.util.DBUtil;
 
