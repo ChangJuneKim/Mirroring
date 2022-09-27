@@ -1,9 +1,12 @@
-package com.ssafy.board;
+package com.ssafy.board.model.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.ssafy.board.dto.Board;
+import com.ssafy.board.etc.BoardException;
+import com.ssafy.board.model.dao.BoardDao;
 import com.ssafy.board.util.DBUtil;
 
 public class BoardService {
@@ -49,7 +52,6 @@ public class BoardService {
 		try {
 			conn = DBUtil.getConnection();
 			cnt = dao.insert(conn, board);
-			
 			conn.commit();
 		}
 		catch (SQLException | BoardException e) {

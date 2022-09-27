@@ -1,4 +1,4 @@
-package com.ssafy.board;
+package com.ssafy.board.etc;
 
 public class BoardException extends Exception {
 	

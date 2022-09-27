@@ -1,4 +1,4 @@
-package com.ssafy.board;
+package com.ssafy.board.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ssafy.board.dto.Board;
+import com.ssafy.board.etc.BoardException;
+
 public class BoardDao {
 
 	public List<Board> selectAll(Connection conn) throws SQLException {
 		// 실행할 쿼리문 작성
-		String sql = "SELECT no, title, content, id, created_at FROM board ORDER BY no DESC";
+		String sql = "SELECT no, title, content, user_id, created_at FROM board ORDER BY no DESC";
 
 		// 3-1. 쿼리문을 실행할 PreparedStatement 객체를 가져옴
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -25,7 +28,7 @@ public class BoardDao {
 			list.add(new Board(result.getInt("no"),
 					result.getString("title"),
 					result.getString("content"),
-					result.getString("id"),
+					result.getString("user_id"),
 					result.getTimestamp("created_at").getTime()));
 		}
 
@@ -61,7 +64,7 @@ public class BoardDao {
 	public int insert(Connection conn, Board board) throws SQLException, BoardException {
 
 		// 실행할 쿼리문 작성
-		String sql = "INSERT INTO board (title, content, id, created_at) VALUES (?, ?, ?, NOW())";
+		String sql = "INSERT INTO board (title, content, user_id, created_at) VALUES (?, ?, ?, NOW())";
 
 		// 3-1. 쿼리문을 실행할 PreparedStatement 객체를 가져옴
 		PreparedStatement stmt = conn.prepareStatement(sql);
@@ -69,7 +72,7 @@ public class BoardDao {
 		// 3-2. 물음표 부분을 채워 넣기
 		stmt.setString(1, board.getTitle());
 		stmt.setString(2, board.getContent());
-		stmt.setString(3, board.getId());
+		stmt.setString(3, board.getUserId());
 
 		// 4-1. 쿼리문 실행
 		int cnt = stmt.executeUpdate();

@@ -1,45 +1,32 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${ pageContext.request.contextPath }"></c:set>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>SSAFY 게시판 관리</title>
+	<%@ include file="/include/head.jsp" %>
 </head>
 <body>
-	<header>
-		<form method="post" action="login">
-			<label>아이디: <input type="text" name="id"></label> <label>비밀번호:
-				<input type="password" name="pass">
-			</label> <input type="submit" value="로그인">
-		</form>
-		<div style="display: none">
-			<span id="userId"></span> <span>님 환영합니다. </span> <a href="logout">로그아웃</a>
-		</div>
-	</header>
+	<%@ include file="/include/nav.jsp" %>
 
-	<h1>게시판 관리 Server</h1>
+	<%-- 페이지만의 내용 --%>
+	<div class="container p-4">
+	
+		안녕하세요. 게시판 관리 사이트 입니다.
+		
+		<c:if test="${ !empty user }">
+			<div>${ user.id }님 로그인 되었습니다. <a href="${ root }/user/logout">로그아웃</a></div> 
+		</c:if>
+		<c:if test="${ empty user }">
+			<form method="post" action="${ root }/user/login">
+				<c:if test="${ !empty message }">
+					<div>${ message }</div>
+				</c:if>
+				<label>ID <input type="text" name="id"></label>
+				<label>PASSWORD <input type="password" name="pass"></label>
+				<input type="submit" value="LOGIN">
+			</form>
+		</c:if>
+	
+	</div>
 
-	<form method="post" action="${root}/regist">
-		<label>제목: <input type="text" name="title"></label> <label>내용:
-			<input type="text" name="content">
-		</label> <label>작성자ID: <input type="text" name="id"></label> <input
-			type="submit" value="글 등록">
-	</form>
-
-	<a href="${root}/list">글 목록 페이지로 이동</a>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
+<%@ include file="/include/footer.jsp" %>

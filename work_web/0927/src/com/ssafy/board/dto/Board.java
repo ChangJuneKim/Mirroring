@@ -1,4 +1,4 @@
-package com.ssafy.board;
+package com.ssafy.board.dto;
 
 public class Board {
 	
@@ -12,19 +12,19 @@ public class Board {
 	private String content;
 	
 	// 작성자 id
-	private String id;
+	private String userId;
 	
 	// 글 작성날짜
 	private long createdAt;
 	
 	public Board() {}
 
-	public Board(int no, String title, String content, String id, long createdAt) {
+	public Board(int no, String title, String content, String userId, long createdAt) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
-		this.id = id;
+		this.userId = userId;
 		this.createdAt = createdAt;
 	}
 
@@ -52,12 +52,12 @@ public class Board {
 		this.content = content;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public long getCreatedAt() {
@@ -77,11 +77,12 @@ public class Board {
 		builder.append(title);
 		builder.append(", content=");
 		builder.append(content);
-		builder.append(", id=");
-		builder.append(id);
+		builder.append(", userId=");
+		builder.append(userId);
 		builder.append(", createdAt=");
 		builder.append(createdAt);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 }
