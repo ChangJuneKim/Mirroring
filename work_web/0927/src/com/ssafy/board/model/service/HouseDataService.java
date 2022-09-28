@@ -39,17 +39,22 @@ public class HouseDataService {
 		return map;
 	}
 
-	public Map<String, String> selectDongNames(String gugunCode) {
-		Connection conn = null;
-		Map<String, String> map = null;
-		
-		try {
-			conn = DBUtil.getConnection(DB_NAME);
-			map = dao.selectDongNames(conn, gugunCode);
-		} finally {
-			DBUtil.close(conn);
-		}
-		return map;
+	public Map<String, Object> getRowHouseTrade(String regionCode, String dealYmd) {
+		Map<String, Object> response = dao.requestRowHouseTrade(regionCode, dealYmd);
+		return response;
 	}
+
+//	public Map<String, String> selectDongNames(String gugunCode) {
+//		Connection conn = null;
+//		Map<String, String> map = null;
+//		
+//		try {
+//			conn = DBUtil.getConnection(DB_NAME);
+//			map = dao.selectDongNames(conn, gugunCode);
+//		} finally {
+//			DBUtil.close(conn);
+//		}
+//		return map;
+//	}
 
 }

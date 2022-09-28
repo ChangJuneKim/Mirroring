@@ -84,29 +84,21 @@
 					
 					document.querySelector("#gugun").innerHTML = options;
 				});
-			})
+			});
 			
-			/* document.querySelector("#gugun").addEventListener("change", function() {
-				let gugunCode = this[this.selectedIndex].value;
-				
-				// 구군 정보 얻기
-				const url = '${ root }' + '/rest/house/dong?' + new URLSearchParams({
-					gugunCode : gugunCode
-				});
-				
-				fetch(url, {
-					method : 'GET'
-				})
-				.then((response) => response.json())
-				.then((data) => {
-					let options = `<option value="">동선택</option>`;
-					Object.keys(data).forEach(function(key){
-						options += `<option value="\${ key }">\${ data[key] }</option>`;
-					});
-					
-					document.querySelector("#dong").innerHTML = options;
-				});
-			}) */
+			// 연립다세대 API 호출을 위한 요청 fetch 작성
+			const rowHouseUrl = '${ root }' + '/rest/house/row-house/trade?' + new URLSearchParams({
+				regionCode : "11110",
+				dealYmd : "202112"
+			});
+			
+			fetch(rowHouseUrl, {
+				method : 'GET'
+			})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+			})
 		}
 	</script>
 	<%@ include file="/include/footer.jsp"%>
