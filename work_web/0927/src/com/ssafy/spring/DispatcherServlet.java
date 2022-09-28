@@ -80,8 +80,13 @@ public class DispatcherServlet extends HttpServlet {
 				break;
 			}
 			
-			case "/rest/house/dong": {
-				obj = houseDataRestController.getDongNames(req, resp);
+//			case "/rest/house/dong": {
+//				obj = houseDataRestController.getDongNames(req, resp);
+//				break;
+//			}
+			
+			case "/rest/house/row-house/trade": { // 연립다세대 API 요청 처리
+				obj = houseDataRestController.getRowHouseTrade(req, resp);
 				break;
 			}
 		}

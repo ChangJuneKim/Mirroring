@@ -36,16 +36,26 @@ public class HouseDataRestController {
 		return null;
 	}
 
-	public Object getDongNames(HttpServletRequest req, HttpServletResponse resp) {
-		String gugunCode = req.getParameter("gugunCode").substring(2, 5);
+//	public Object getDongNames(HttpServletRequest req, HttpServletResponse resp) {
+//		String gugunCode = req.getParameter("gugunCode").substring(2, 5);
+//		
+//		try {
+//			Map<String, String> map = service.selectDongNames(gugunCode);
+//			return map;
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return null;
+//	}
+
+	public Object getRowHouseTrade(HttpServletRequest req, HttpServletResponse resp) {
+		// 클라이언트로부터 전달받은 지역코드 (동코드 5자리) 거래년월을 받는다.
+		String regionCode = req.getParameter("regionCode");
+		String dealYmd = req.getParameter("dealYmd");
 		
-		try {
-			Map<String, String> map = service.selectDongNames(gugunCode);
-			return map;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Map<String, Object> response = service.getRowHouseTrade(regionCode, dealYmd);
 		
-		return null;
+		return response;
 	}
 }
