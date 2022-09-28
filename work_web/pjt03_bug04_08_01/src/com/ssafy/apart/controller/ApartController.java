@@ -1,4 +1,4 @@
-package com.ssafy;
+package com.ssafy.apart.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -16,8 +16,8 @@ import javax.websocket.Decoder.Text;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebServlet("/main")
-public class MainController extends HttpServlet {
+@WebServlet("/apart")
+public class ApartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -27,6 +27,7 @@ public class MainController extends HttpServlet {
 
 		System.out.println("main/" + act);
 		String path = "/index.jsp";
+		Object object = null;
 
 		if ("mvapt".equals(act)) {
 			path = "/apt.jsp";
@@ -37,40 +38,12 @@ public class MainController extends HttpServlet {
 		} else if ("mvland".equals(act)) {
 			path = "/land.jsp";
 			redirect(request, response, path);
-		} else if ("setprefer".equals(act)) {
-			path = setPrefer(request, response);
-			forward(request, response, path);
+		} else if ("mvland".equals(act)) {
+			path = "/land.jsp";
+			redirect(request, response, path);
 		} else {
 			redirect(request, response, path);
 		}
-	}
-
-	private String setPrefer(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-		String sido = request.getParameter("sido");
-		String gugun = request.getParameter("gugun");
-		String dong = request.getParameter("dong");
-		
-		ObjectMapper mapper = new ObjectMapper();
-		PreferDto preferDto = new PreferDto();
-		preferDto.setSido(sido);
-		preferDto.setGugun(gugun);
-		preferDto.setDong(dong);
-		
-		
-		
-		try {
-			String preferJson = mapper.writeValueAsString(preferDto);
-			
-			preferJson = URLEncoder.encode(preferJson, "utf-8").replaceAll("\\+", "%20");
-			Cookie cookie = new Cookie("prefer", preferJson);
-			cookie.setMaxAge(60*60*24*400);	
-			response.addCookie(cookie);
-			
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "/index.jsp";
 	}
 
 	@Override

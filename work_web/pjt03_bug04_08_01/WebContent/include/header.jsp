@@ -16,7 +16,7 @@
 	<nav class="header__nav">
 		<ul>
 			<li class="header__nav-item"><a href="${root}/board?act=list">공지사항</a></li>
-			<li class="header__nav-item"><a href="#">아파트정보</a></li>
+			<li class="header__nav-item"><a href="${root}/apart?act=mvapt2">아파트정보</a></li>
 		</ul>
 
 		<ul>

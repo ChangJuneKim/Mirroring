@@ -140,15 +140,15 @@
 	<!-- 푸터 끝-->
 	<script>
 	document.querySelector('.apt').addEventListener('click', () => {
-		  location.href = '${root}/main?act=mvapt';
+		  location.href = '${root}/apart?act=mvapt';
 		});
 
 		document.querySelector('.apt2').addEventListener('click', () => {
-		  location.href = '${root}/main?act=mvapt2';
+		  location.href = '${root}/apart?act=mvapt2';
 		});
 
 		document.querySelector('.land').addEventListener('click', () => {
-		  location.href = '${root}/main?act=mvland';
+		  location.href = '${root}/apart?act=mvland';
 		});
     </script>
 </body>

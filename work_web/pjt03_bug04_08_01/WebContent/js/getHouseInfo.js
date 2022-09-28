@@ -1,5 +1,15 @@
 ///////////////////////// select box 설정 (지역, 매매기간) /////////////////////////
-let date = new Date();
+const date = new Date();
+
+const setYears = () => {
+  const yearEl = document.querySelector('#year');
+  let yearOpt = `<option value="">매매년도선택</option>`;
+  const year = date.getFullYear();
+  for (let i = year; i > year - 20; i--) {
+    yearOpt += `<option value="${i}">${i}년</option>`;
+  }
+  yearEl.innerHTML = yearOpt;
+};
 
 window.onload = function () {
   let yearEl = document.querySelector('#year');

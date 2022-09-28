@@ -34,19 +34,6 @@
     <!-- 헤더 -->
 	<%@ include file="/include/header.jsp"%>
 	<!-- 헤더 끝-->
-	<%
-	String cookie = request.getHeader("Cookie");
-	String result = "";
-	if(cookie != null){
-		Cookie[] cookies = request.getCookies();
-		
-		for(int i = 0; i < cookies.length; i++){
-			if(cookies[i].getName().equals("prefer")){
-				result = URLDecoder.decode(cookies[i].getValue(), "utf-8");
-			}
-		}
-	}
-	%>
     <main class="apt2__main">
       <header class="container">
         <h1 class="text-center my-3">아파트 매매 정보</h1>

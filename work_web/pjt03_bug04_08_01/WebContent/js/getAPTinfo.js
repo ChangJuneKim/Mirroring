@@ -1,124 +1,98 @@
 ///////////////////////// 아파트 매매 정보 /////////////////////////
-document.querySelector("#list-btn").addEventListener("click", function () {
+document.querySelector('#list-btn').addEventListener('click', function () {
   let url =
-    "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-  let gugunSel = document.querySelector("#gugun");
+    'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
+  let gugunSel = document.querySelector('#gugun');
   let regCode = gugunSel[gugunSel.selectedIndex].value.substr(0, 5);
-  let yearSel = document.querySelector("#year");
+  let yearSel = document.querySelector('#year');
   let year = yearSel[yearSel.selectedIndex].value;
-  let monthSel = document.querySelector("#month");
+  let monthSel = document.querySelector('#month');
   let month = monthSel[monthSel.selectedIndex].value;
   let dealYM = year + month;
   let queryParams =
-    encodeURIComponent("serviceKey") +
-    "=" +
-    "3TiCQY3pC107f9c%2BdIC1Z9CX8%2FaTrslMLae%2B9MYxho%2BZVK5V9aXNgGn9SrEsmOFAVDB3tI6ol3IW1MQRMjShbg%3D%3D"; /*Service Key*/
+    encodeURIComponent('serviceKey') +
+    '=' +
+    '3TiCQY3pC107f9c%2BdIC1Z9CX8%2FaTrslMLae%2B9MYxho%2BZVK5V9aXNgGn9SrEsmOFAVDB3tI6ol3IW1MQRMjShbg%3D%3D'; /*Service Key*/
   queryParams +=
-    "&" +
-    encodeURIComponent("LAWD_CD") +
-    "=" +
-    encodeURIComponent(regCode); /*아파트소재 구군*/
+    '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent(regCode); /*아파트소재 구군*/
   queryParams +=
-    "&" +
-    encodeURIComponent("DEAL_YMD") +
-    "=" +
-    encodeURIComponent(dealYM); /*조회년월*/
+    '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent(dealYM); /*조회년월*/
+  queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지번호*/
   queryParams +=
-    "&" +
-    encodeURIComponent("pageNo") +
-    "=" +
-    encodeURIComponent("1"); /*페이지번호*/
-  queryParams +=
-    "&" +
-    encodeURIComponent("numOfRows") +
-    "=" +
-    encodeURIComponent("30"); /*페이지당건수*/
+    '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('30'); /*페이지당건수*/
 
   fetch(`${url}?${queryParams}`)
-    .then((response) => response.text())
-    .then((data) => {
+    .then(response => response.text())
+    .then(data => {
       makeList(data);
     });
 });
 
-const filterTransactionHistory = (name) => {
+const filterTransactionHistory = name => {
   let url =
-    "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
-  let gugunSel = document.querySelector("#gugun");
+    'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
+  let gugunSel = document.querySelector('#gugun');
   let regCode = gugunSel[gugunSel.selectedIndex].value.substr(0, 5);
-  let yearSel = document.querySelector("#year");
+  let yearSel = document.querySelector('#year');
   let year = yearSel[yearSel.selectedIndex].value;
-  let monthSel = document.querySelector("#month");
+  let monthSel = document.querySelector('#month');
   let month = monthSel[monthSel.selectedIndex].value;
   let dealYM = year + month;
   let queryParams =
-    encodeURIComponent("serviceKey") +
-    "=" +
-    "3TiCQY3pC107f9c%2BdIC1Z9CX8%2FaTrslMLae%2B9MYxho%2BZVK5V9aXNgGn9SrEsmOFAVDB3tI6ol3IW1MQRMjShbg%3D%3D"; /*Service Key*/
+    encodeURIComponent('serviceKey') +
+    '=' +
+    '3TiCQY3pC107f9c%2BdIC1Z9CX8%2FaTrslMLae%2B9MYxho%2BZVK5V9aXNgGn9SrEsmOFAVDB3tI6ol3IW1MQRMjShbg%3D%3D'; /*Service Key*/
   queryParams +=
-    "&" +
-    encodeURIComponent("LAWD_CD") +
-    "=" +
-    encodeURIComponent(regCode); /*아파트소재 구군*/
+    '&' + encodeURIComponent('LAWD_CD') + '=' + encodeURIComponent(regCode); /*아파트소재 구군*/
   queryParams +=
-    "&" +
-    encodeURIComponent("DEAL_YMD") +
-    "=" +
-    encodeURIComponent(dealYM); /*조회년월*/
+    '&' + encodeURIComponent('DEAL_YMD') + '=' + encodeURIComponent(dealYM); /*조회년월*/
+  queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지번호*/
   queryParams +=
-    "&" +
-    encodeURIComponent("pageNo") +
-    "=" +
-    encodeURIComponent("1"); /*페이지번호*/
-  queryParams +=
-    "&" +
-    encodeURIComponent("numOfRows") +
-    "=" +
-    encodeURIComponent("30"); /*페이지당건수*/
+    '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('30'); /*페이지당건수*/
 
   fetch(`${url}?${queryParams}`)
-    .then((response) => response.text())
-    .then((data) => filterList(data, name));
+    .then(response => response.text())
+    .then(data => filterList(data, name));
 };
 
 async function filterList(data, name) {
   console.log(name);
   let parser = new DOMParser();
-  const xml = parser.parseFromString(data, "application/xml");
+  const xml = parser.parseFromString(data, 'application/xml');
   // console.log(xml);
 
-  let apts = xml.querySelectorAll("item");
+  let apts = xml.querySelectorAll('item');
   const apartData = [];
   let filteredApart;
 
-  apts.forEach((apt) => {
+  apts.forEach(apt => {
     const transactionInfo = {
-      apart: apt.querySelector("아파트").textContent,
-      amount: apt.querySelector("거래금액").textContent.trim(),
-      dedicatedArea: apt.querySelector("전용면적").textContent,
-      date: `${apt.querySelector("년").textContent}. ${
-        apt.querySelector("월").textContent
-      }. ${apt.querySelector("일").textContent}.`,
-      category: `${apt.querySelector("거래유형").textContent}`,
+      apart: apt.querySelector('아파트').textContent,
+      amount: apt.querySelector('거래금액').textContent.trim(),
+      dedicatedArea: apt.querySelector('전용면적').textContent,
+      date: `${apt.querySelector('년').textContent}. ${apt.querySelector('월').textContent}. ${
+        apt.querySelector('일').textContent
+      }.`,
+      category: `${apt.querySelector('거래유형').textContent}`,
     };
 
     apartData.push(transactionInfo);
-    filteredApart = apartData.filter((apart) => apart.apart === name);
+    filteredApart = apartData.filter(apart => apart.apart === name);
   });
 
   initList();
 
-  const $apartName = document.createElement("h1");
+  const $apartName = document.createElement('h1');
   $apartName.innerText = `${name}`;
-  document.querySelector("#apart-info").appendChild($apartName);
+  document.querySelector('#apart-info').appendChild($apartName);
 
   for (const apartElement of filteredApart) {
     console.log(apartElement);
-    const $apartInfo = document.createElement("li");
-    const $amount = document.createElement("p");
-    const $dedicatedArea = document.createElement("p");
-    const $date = document.createElement("p");
-    const $category = document.createElement("p");
+    const $apartInfo = document.createElement('li');
+    const $amount = document.createElement('p');
+    const $dedicatedArea = document.createElement('p');
+    const $date = document.createElement('p');
+    const $category = document.createElement('p');
     const { amount, dedicatedArea, category, date } = apartElement;
 
     $amount.innerText = `거래금액 : ${amount}`;
@@ -130,65 +104,59 @@ async function filterList(data, name) {
     $apartInfo.appendChild($dedicatedArea);
     $apartInfo.appendChild($date);
     $apartInfo.appendChild($category);
-    document.querySelector("#apart-info").appendChild($apartInfo);
+    document.querySelector('#apart-info').appendChild($apartInfo);
   }
 }
 
 function makeList(data) {
   let parser = new DOMParser();
-  const xml = parser.parseFromString(data, "application/xml");
+  const xml = parser.parseFromString(data, 'application/xml');
   // console.log(xml);
   initList();
-  let apts = xml.querySelectorAll("item");
+  let apts = xml.querySelectorAll('item');
 
   let positions = [];
   const apartData = [];
 
-  apts.forEach((apt) => {
-    const apartInfo = document.createElement("li");
-    const apartName = document.createElement("p");
-    const amount = document.createElement("p");
-    const dedicatedArea = document.createElement("p");
-    const date = document.createElement("p");
+  apts.forEach(apt => {
+    const apartInfo = document.createElement('li');
+    const apartName = document.createElement('p');
+    const amount = document.createElement('p');
+    const dedicatedArea = document.createElement('p');
+    const date = document.createElement('p');
 
     let apt_addr =
-      apt.querySelector("도로명").textContent +
-      " " +
-      apt.querySelector("도로명건물본번호코드").textContent;
+      apt.querySelector('도로명').textContent +
+      ' ' +
+      apt.querySelector('도로명건물본번호코드').textContent;
 
     let position = {
       addr: apt_addr,
-      content: apt.querySelector("아파트").textContent,
+      content: apt.querySelector('아파트').textContent,
     };
 
     const transactionInfo = {
-      apart: apt.querySelector("아파트").textContent,
-      amount: apt.querySelector("거래금액").textContent.trim(),
-      dedicatedArea: apt.querySelector("전용면적").textContent,
-      date: `${apt.querySelector("년").textContent}. ${
-        apt.querySelector("월").textContent
-      }. ${apt.querySelector("일").textContent}.`,
+      apart: apt.querySelector('아파트').textContent,
+      amount: apt.querySelector('거래금액').textContent.trim(),
+      dedicatedArea: apt.querySelector('전용면적').textContent,
+      date: `${apt.querySelector('년').textContent}. ${apt.querySelector('월').textContent}. ${
+        apt.querySelector('일').textContent
+      }.`,
     };
 
-    apartName.innerText = `아파트명 : ${
-      apt.querySelector("아파트").textContent
-    }`;
-    amount.innerText = `거래금액 : ${apt
-      .querySelector("거래금액")
-      .textContent.trim()}`;
-    dedicatedArea.innerText = `전용면적 : ${
-      apt.querySelector("전용면적").textContent
-    }`;
-    date.innerText = `거래일자 : ${apt.querySelector("년").textContent}. ${
-      apt.querySelector("월").textContent
-    }. ${apt.querySelector("일").textContent}.`;
+    apartName.innerText = `아파트명 : ${apt.querySelector('아파트').textContent}`;
+    amount.innerText = `거래금액 : ${apt.querySelector('거래금액').textContent.trim()}`;
+    dedicatedArea.innerText = `전용면적 : ${apt.querySelector('전용면적').textContent}`;
+    date.innerText = `거래일자 : ${apt.querySelector('년').textContent}. ${
+      apt.querySelector('월').textContent
+    }. ${apt.querySelector('일').textContent}.`;
 
     apartInfo.appendChild(apartName);
     apartInfo.appendChild(amount);
     apartInfo.appendChild(dedicatedArea);
     apartInfo.appendChild(date);
 
-    document.querySelector("#apart-info").appendChild(apartInfo);
+    document.querySelector('#apart-info').appendChild(apartInfo);
 
     apartData.push(transactionInfo);
     positions.push(position);
@@ -197,7 +165,7 @@ function makeList(data) {
 
   console.log(apartData);
 
-  var mapContainer = document.getElementById("apt2_map"), // 지도를 표시할 div
+  var mapContainer = document.getElementById('apt2_map'), // 지도를 표시할 div
     mapOption = {
       center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
       level: 5, // 지도의 확대 레벨
@@ -225,28 +193,23 @@ function makeList(data) {
 
         // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({
-          content:
-            '<div style="width:100%; padding:5px;">' + iwContent + "</div>",
+          content: '<div style="width:100%; padding:5px;">' + iwContent + '</div>',
           removable: iwRemoveable,
         });
 
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(
           marker,
-          "mouseover",
+          'mouseover',
           makeOverListener(map, marker, infowindow)
         );
 
-        kakao.maps.event.addListener(marker, "click", () =>
+        kakao.maps.event.addListener(marker, 'click', () =>
           filterTransactionHistory(infowindow.a.innerText)
         );
 
         // 마커에 클릭이벤트를 등록합니다
-        kakao.maps.event.addListener(
-          marker,
-          "mouseout",
-          makeOutListener(infowindow)
-        );
+        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 
         // var infowindow = new kakao.maps.InfoWindow({
         //   content: positions[i].content, // 인포윈도우에 표시할 내용
@@ -275,5 +238,5 @@ function makeOutListener(infowindow) {
 }
 
 function initList() {
-  document.querySelector("#apart-info").innerHTML = null;
+  document.querySelector('#apart-info').innerHTML = null;
 }
