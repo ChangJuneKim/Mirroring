@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-// 백준 1463(S3) 1로 만들기
+// 백준 1149(S1) RGB거리
 public class Main {
 
 	final int RED = 0;
