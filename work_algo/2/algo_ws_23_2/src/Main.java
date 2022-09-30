@@ -3,14 +3,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
 // 백준 1600 (G3) 말이되고픈 원숭이
 public class Main {
 
-    int N;
-    int[][] map;
-    int answer = 0;
+    int K;
+    int H, W;
+    int[][] board;
+    boolean[][][] visited;
+
+    int min = Integer.MAX_VALUE;
+
+    int[] mx = {-1, 0, 1, 0};
+    int[] my = {0, 1, 0, -1};
+
+    int[] hx = {-1, -2, -2, -1, 1, 2, 2, 1};
+    int[] hy = {-2, -1, 1, 2, 2, 1, -1, -2};
 
     public static void main(String[] args) throws IOException {
         new Main().solution();
@@ -21,75 +31,98 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        N = Integer.parseInt(br.readLine());
+        K = Integer.parseInt(br.readLine());
 
-        map = new int[N][N];
+        st = new StringTokenizer(br.readLine());
 
-        for (int i = 0; i < N; i++) {
+        W = Integer.parseInt(st.nextToken());
+        H = Integer.parseInt(st.nextToken());
+
+        board = new int[H][W];
+        visited = new boolean[H][W][K + 1];
+
+        for (int i = 0; i < H; i++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < N; j++) {
-                map[i][j] = Integer.parseInt(st.nextToken());
+            for (int j = 0; j < W; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
             }
         }
+        bfs(0, 0);
 
-        // 0 가로
-        pipe(0, 1, 0);
-        System.out.println(answer);
+        System.out.println(min == Integer.MAX_VALUE ? -1 : min);
+
+
     }
 
-    /**
-     * @param x         x좌표
-     * @param y         y좌표
-     * @param direction 0가로 1세로 2대각
-     */
-    private void pipe(int x, int y, int direction) {
-        if (x == N - 1 && y == N - 1 && map[x][y] == 0) {
-            answer++;
-            return;
+    private void bfs(int x, int y) {
+        ArrayDeque<Monkey> queue = new ArrayDeque<Monkey>();
+        queue.offer(new Monkey(x, y, 0, 0));
+        visited[x][y][0] = true; // 원숭이 일 때 visited
+
+        while (!queue.isEmpty()) {
+            Monkey monkey = queue.poll();
+            int curX = monkey.x;
+            int curY = monkey.y;
+            int horseJumpCount = monkey.k;
+            int step = monkey.step;
+
+            if (curX == H - 1 && curY == W - 1) {
+                min = monkey.step;
+                return;
+            }
+
+            for (int i = 0; i < 4; i++) {
+                int nx = curX + mx[i];
+                int ny = curY + my[i];
+
+                if (isIn(nx, ny) && board[nx][ny] == 0 && !visited[nx][ny][horseJumpCount]) {
+                    queue.offer(new Monkey(nx, ny, horseJumpCount, step + 1));
+                    visited[nx][ny][horseJumpCount] = true;
+                }
+            }
+
+            if (horseJumpCount < K) {
+                for (int i = 0; i < 8; i++) {
+                    int nx = curX + hx[i];
+                    int ny = curY + hy[i];
+
+                    if (isIn(nx, ny) && board[nx][ny] == 0 && !visited[nx][ny][horseJumpCount + 1]) {
+                        queue.offer(new Monkey(nx, ny, horseJumpCount + 1, step + 1));
+                        visited[nx][ny][horseJumpCount + 1] = true;
+                    }
+                }
+            }
         }
 
-        // 가로
-        if (direction == 0) {
-            // 가로(오른쪽)
-            if (isIn(x, y + 1) && map[x][y + 1] == 0) {
-                pipe(x, y + 1, 0);
-            }
-
-            if (isIn(x, y + 1) && isIn(x + 1, y) && isIn(x + 1, y + 1)
-                    && map[x][y + 1] == 0 && map[x + 1][y] == 0 && map[x + 1][y + 1] == 0) {
-                pipe(x + 1, y + 1, 2);
-            }
-        } else if (direction == 1) { // 세로
-            // 세로
-            if (isIn(x + 1, y) && map[x + 1][y] == 0) {
-                pipe(x + 1, y, 1);
-            }
-
-            // 대각
-            if (isIn(x, y + 1) && isIn(x + 1, y) && isIn(x + 1, y + 1) && map[x][y + 1] == 0 && map[x + 1][y] == 0 && map[x + 1][y + 1] == 0) {
-                pipe(x + 1, y + 1, 2);
-            }
-        } else if (direction == 2) { // 대각
-            // 가로(오른쪽)
-            if (isIn(x, y + 1) && map[x][y + 1] == 0) {
-                pipe(x, y + 1, 0);
-            }
-
-            // 세로
-            if (isIn(x + 1, y) && map[x + 1][y] == 0) {
-                pipe(x + 1, y, 1);
-            }
-
-            // 대각
-            if (isIn(x, y + 1) && isIn(x + 1, y) && isIn(x + 1, y + 1)
-                    && map[x][y + 1] == 0 && map[x + 1][y] == 0 && map[x + 1][y + 1] == 0) {
-                pipe(x + 1, y + 1, 2);
-            }
-        }
     }
+
 
     private boolean isIn(int x, int y) {
-        return 0 <= x && x < N && 0 <= y && y < N;
+        return 0 <= x && x < H && 0 <= y && y < W;
     }
 
+    private class Monkey {
+        int x;
+        int y;
+        int k; // 말처럼 움직일 수 있는 횟수
+
+        int step;
+
+        public Monkey(int x, int y, int k, int step) {
+            this.x = x;
+            this.y = y;
+            this.k = k;
+            this.step = step;
+        }
+
+
+        @Override
+        public String toString() {
+            return "Monkey{" +
+                    "x=" + x +
+                    ", y=" + y +
+                    ", k=" + k +
+                    '}';
+        }
+    }
 }
