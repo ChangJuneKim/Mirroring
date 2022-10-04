@@ -1,4 +1,4 @@
-package a1004.add;
+package bo;
 
 import java.io.*;
 import java.util.*;
