@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
-public class Solution_보급로 {
+public class Solution_보급로_PQ {
 
 	static int N = 0, INF = Integer.MAX_VALUE;
 	static int map[][];
@@ -30,6 +32,16 @@ public class Solution_보급로 {
 
 	private static int dijkstra(int startR, int startC) {
 		
+		// int[] : { r, c, minTime }
+		PriorityQueue<int[]> pQueue = new PriorityQueue<>(new Comparator<int[]>() {
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				return o1[2] - o2[2];
+			}
+			
+		});
+		
 		// 출발지에서 자신으로의 최소비용을 저장할 배열 생성 후 초기화
 		int[][] minCost = new int[N][N];
 		boolean[][] visited = new boolean[N][N];
@@ -42,26 +54,18 @@ public class Solution_보급로 {
 		
 		// 출발지에서 출발지로의 최소비용 0 처리
 		minCost[startR][startC] = 0;
-		int r = 0, c = 0, nr, nc, minTime;
+		pQueue.offer(new int[] { startR, startC, minCost[startR][startC] });
 		
-		while (true) {
+		int r = 0, c = 0, nr, nc, minTime;
+		while (!pQueue.isEmpty()) {
 			
 			// step1. 미방문 정점 중 최소비용 정점 찾기
-			r = -1;
-			c = -1;
-			minTime = INF;
-			for (int i = 0; i < N; i++) {
-				for (int j = 0; j < N; j++) {
-					if (!visited[i][j] && minTime > minCost[i][j]) {
-						minTime = minCost[i][j];
-						r = i;
-						c = j;
-					}
-				}
-			}
+			int[] current = pQueue.poll();
+			r = current[0];
+			c = current[1];
+			minTime = current[2];
 			
-			// r, c가 -1일 경우는 더이상 갈 수 있는 정점이 없다!!
-			if (r == -1) return -1;
+			if (visited[r][c]) continue;
 			
 			visited[r][c] = true;
 			if (r == N - 1 && c == N - 1) return minTime;
@@ -73,10 +77,14 @@ public class Solution_보급로 {
 				
 				if (nr >= 0 && nr < N && nc >= 0 && nc < N && !visited[nr][nc] && 
 						minCost[nr][nc] > minTime + map[nr][nc]) {
+					
 					minCost[nr][nc] = minTime + map[nr][nc];
+					pQueue.offer(new int[] { nr, nc, minCost[nr][nc] });
 				}
 			}
 		}
+		
+		return -1;
 	}
 
 }
