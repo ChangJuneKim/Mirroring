@@ -4,16 +4,16 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 // 백준 9205 S1 맥주 마시면서 걸어가기
 public class Main {
     
-    int N, M;
-    int[][] board;
-    
-    int[] dx = {-1, 0, 1, 0};
-    int[] dy = {0, 1, 0, -1};
+    int T, N;
+    int beer;
+    ArrayList<Point> points;
+    ArrayList<ArrayList<Integer>> graph;
     
     public static void main(String[] args) throws IOException {
         new Main().solution();
@@ -23,73 +23,87 @@ public class Main {
         System.setIn(Files.newInputStream(Paths.get("input.txt")));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
         
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        T = Integer.parseInt(st.nextToken());
         
-        board = new int[N][M];
-        
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < M; j++) {
-                board[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
-        
-        bfs();
-    }
-    
-    private void bfs() {
-        boolean[][] visited = new boolean[N][M];
-        ArrayDeque<int[]> airs = new ArrayDeque<>();
-        
-        airs.offer(new int[]{0, 0});
-        visited[0][0] = true;
-        
-        ArrayDeque<int[]> willMelt = new ArrayDeque<>();
-        
-        int hour = 0;
-        int prev = 0;
-        
-        while (true) {
+        for (int testCase = 0; testCase < T; testCase++) {
+            N = Integer.parseInt(br.readLine());
             
-            while (!airs.isEmpty()) {
-                int[] current = airs.poll();
-                int curX = current[0];
-                int curY = current[1];
-                for (int d = 0; d < 4; d++) {
-                    int nx = curX + dx[d];
-                    int ny = curY + dy[d];
-                    
-                    if (isIn(nx, ny) && !visited[nx][ny]) {
-                        visited[nx][ny] = true;
-                        // 공기면
-                        if (board[nx][ny] == 0) {
-                            airs.offer(new int[]{nx, ny});
-                        } else {
-                            willMelt.offer(new int[]{nx, ny});
-                        }
+            points = new ArrayList<>();
+            
+            for (int i = 0; i < N + 2; i++) {
+                st = new StringTokenizer(br.readLine());
+                points.add(new Point(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+            }
+            
+            graph = new ArrayList<>();
+            
+            for (int i = 0; i < N + 2; i++) {
+                graph.add(new ArrayList<>());
+            }
+            
+            for (int i = 0; i < N + 2; i++) {
+                for (int j = i + 1; j < N + 2; j++) {
+                    if (getDistance(points.get(i), points.get(j)) <= 1000) {
+                        graph.get(i).add(j);
+                        graph.get(j).add(i);
                     }
                 }
             }
             
-            if (willMelt.isEmpty()) {
-                break;
+            int result = bfs();
+            if (result == -1) {
+                sb.append("sad\n");
             } else {
-                prev = willMelt.size();
-                hour++;
-                
-                ArrayDeque<int[]> temp = airs;
-                airs = willMelt;
-                willMelt = temp;
+                sb.append("happy\n");
             }
         }
-        System.out.println(hour);
-        System.out.println(prev);
+        System.out.println(sb);
     }
     
-    private boolean isIn(int nx, int ny) {
-        return 0 <= nx && nx < N && 0 <= ny && ny < M;
+    private int bfs() {
+        ArrayDeque<Integer> queue = new ArrayDeque<>();
+        queue.offer(0);
+        
+        boolean[] visited = new boolean[N + 2];
+        visited[0] = true;
+        
+        int count = 0;
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            
+            for (int i = 0; i < size; i++) {
+                int current = queue.poll();
+                
+                if (current == N + 1) {
+                    return count;
+                }
+                
+                for (int neighbor : graph.get(current)) {
+                    if (!visited[neighbor]) {
+                        visited[neighbor] = true;
+                        queue.offer(neighbor);
+                    }
+                }
+            }
+            count++;
+        }
+        
+        return -1;
     }
     
+    private int getDistance(Point p1, Point p2) {
+        return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+    }
+    
+    class Point {
+        int x, y;
+        
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
 }
