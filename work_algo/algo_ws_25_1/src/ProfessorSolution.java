@@ -30,7 +30,7 @@ public class ProfessorSolution {
 		/**
 		 * 0. 입력파일 읽어들이기
 		 */
-		System.setIn(new FileInputStream("input1.txt"));
+		System.setIn(new FileInputStream("input.txt"));
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
 		// 결과를 한 번에 출력하기 위한 StringBuilder
