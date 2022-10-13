@@ -95,6 +95,12 @@ public class Solution {
 			minDis = Integer.MAX_VALUE;
 
 			int sum = 0;
+			
+			// asdadas
+			for (int i = 0; i < village.length; i++) {
+				System.out.println(Arrays.toString(village[i]));
+			}
+			
 			if (needCount == 1) {
 				for (int i = 0; i < 31; i++) {
 					for (int j = 0; j < 31; j++) {
