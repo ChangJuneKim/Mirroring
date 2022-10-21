@@ -1,19 +1,17 @@
 package com.ssafy.ws.dto;
 
 public class Book {
+	
 	private String isbn;
 	private String title;
 	private String author;
 	private Integer price;
 	private String content;
 	private String img;
-
-	public Book() {
-
-	}
+	
+	public Book() {}
 
 	public Book(String isbn, String title, String author, Integer price, String content, String img) {
-		super();
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
@@ -72,8 +70,21 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", price=" + price + ", content="
-				+ content + ", img=" + img + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Book [isbn=");
+		builder.append(isbn);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", author=");
+		builder.append(author);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append(", content=");
+		builder.append(content);
+		builder.append(", img=");
+		builder.append(img);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

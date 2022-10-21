@@ -50,7 +50,7 @@ public class MemberTest extends UnitTestConfig {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void nullTest() {
 //		if(userService != null) {
 //			logger.debug("userService : {}", userService);
@@ -61,7 +61,7 @@ public class MemberTest extends UnitTestConfig {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void dbConnectTest() throws SQLException {
 		DataSource dataSource = context.getBean(DataSource.class);
 		Connection conn = dataSource.getConnection();

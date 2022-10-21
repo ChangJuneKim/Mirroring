@@ -20,13 +20,11 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int idCheck(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		return memberDao.idCheck(userId);
 	}
 
 	@Override
 	public int joinMember(MemberDto memberDto) throws Exception {
-		// TODO Auto-generated method stub
 		return memberDao.joinMember(memberDto);
 	}
 

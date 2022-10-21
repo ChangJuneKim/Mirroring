@@ -127,9 +127,9 @@
       document.querySelector("#userid").addEventListener("keyup", function () {
     	 let userid = this.value;
     	 let resultDiv = document.querySelector("#idcheck-result");
-    	 if(userid.length < 6 || userid.length > 16) {
+    	 if(userid.length < 2 || userid.length > 16) {
     		 resultDiv.setAttribute("class", "mb-3 text-dark");
-    		 resultDiv.textContent = "아이디는 6자 이상 16자 이하 입니다.";
+    		 resultDiv.textContent = "아이디는 2자 이상 16자 이하 입니다.";
     		 isUseId = false;
     	 } else {
     		 fetch("${root}/user/" + userid)

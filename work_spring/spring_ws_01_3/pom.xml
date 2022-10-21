@@ -39,7 +39,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -121,16 +121,19 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- JSP -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>${jsp-version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -174,8 +177,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<!-- JRE 버전을 ${java-version}을 사용하도록 수정한다. -->
+					<source>${java-version}</source>
+					<target>${java-version}</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>

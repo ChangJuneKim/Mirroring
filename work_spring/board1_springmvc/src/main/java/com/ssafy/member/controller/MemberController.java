@@ -3,7 +3,6 @@ package com.ssafy.member.controller;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -26,70 +25,73 @@ import com.ssafy.member.model.service.MemberService;
 @Controller
 @RequestMapping("/user")
 public class MemberController {
-
+	
 	private final Logger logger = LoggerFactory.getLogger(MemberController.class);
-
+	
 	private final MemberService memberService;
-
+	
 	@Autowired
 	public MemberController(MemberService memberService) {
 		this.memberService = memberService;
 	}
 	
-	@GetMapping("/{userid}")
-	@ResponseBody
-	public String idCheck(@PathVariable("userid") String userId) throws Exception{
-		logger.debug("idCheck userid : {}", userId);
-		int cnt = memberService.idCheck(userId);
-		return cnt + "";
-	}
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
-			HttpServletResponse response) {
-		logger.debug("map : {}", map.get("userid"));
-
-		try {
-			MemberDto memberDto = memberService.loginMember(map);
-			if (memberDto != null) {
-				session.setAttribute("userinfo", memberDto);
-
-				Cookie cookie = new Cookie("ssafy_id", map.get("userid"));
-				cookie.setPath("/board");
-				if ("ok".equals(map.get("saveid"))) {
-					cookie.setMaxAge(60 * 60 * 24 * 365 * 40);
-				} else {
-					cookie.setMaxAge(0);
-				}
-
-				response.addCookie(cookie);
-				return "redirect:/";
-			} else {
-				model.addAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
-				return "user/login";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("msg", "로그인 중 문제 발생!!");
-			return "error/error";
-		}
-	}
-
 	@GetMapping("/join")
 	public String join() {
 		return "user/join";
 	}
-
+	
+	@GetMapping("/{userid}")
+	@ResponseBody
+	public String idCheck(@PathVariable("userid") String userId) throws Exception {
+		logger.debug("idCheck userid : {}", userId);
+		int cnt = memberService.idCheck(userId);
+		return cnt + "";
+	}
+	
 	@PostMapping("/join")
 	public String join(MemberDto memberDto, Model model) {
 		logger.debug("memberDto info : {}", memberDto);
-
+		
 		try {
 			memberService.joinMember(memberDto);
 			return "redirect:/user/login";
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", "회원가입 중 문제 발생!!");
+			model.addAttribute("msg", "회원 가입 중 문제 발생!!!");
+			return "error/error";
+		}
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session, HttpServletResponse response) {
+		logger.debug("map : {}", map.get("userid"));
+		
+		try {
+			MemberDto memberDto = memberService.loginMember(map);
+			if (memberDto != null) {
+				session.setAttribute("userinfo", memberDto);
+				
+				Cookie cookie = new Cookie("ssafy_id", map.get("userid"));
+				cookie.setPath("/board");
+				if ("ok".equals(map.get("saveid"))) {
+					cookie.setMaxAge(60 * 60 * 24 * 365 * 40);
+				}
+				else {
+					cookie.setMaxAge(0);
+				}
+				
+				response.addCookie(cookie);
+				return "redirect:/";
+			}
+			else {
+				model.addAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
+				return "user/login";
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "로그인 중 문제 발생!!");
 			return "error/error";
 		}
 	}

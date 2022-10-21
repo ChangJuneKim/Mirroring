@@ -1,18 +1,15 @@
 package com.ssafy.ws.dto;
 
 public class User {
+	
 	private String id;
 	private String name;
 	private String pass;
 	private String recId;
-
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
+	public User() {}
 
 	public User(String id, String name, String pass, String recId) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.pass = pass;
@@ -53,7 +50,17 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", pass=" + pass + ", recId=" + recId + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", pass=");
+		builder.append(pass);
+		builder.append(", recId=");
+		builder.append(recId);
+		builder.append("]");
+		return builder.toString();
 	}
-
+	
 }

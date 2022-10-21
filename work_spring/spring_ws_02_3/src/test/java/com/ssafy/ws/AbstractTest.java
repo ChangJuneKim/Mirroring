@@ -7,6 +7,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.ssafy.ws.config.ApplicationConfig;
 
 @RunWith(SpringRunner.class)
-//@ContextConfiguration(locations = "/application.xml") xml 파일일 경우 locations
+//@ContextConfiguration(locations = "/application.xml")
 @ContextConfiguration(classes = ApplicationConfig.class)
 public class AbstractTest {}

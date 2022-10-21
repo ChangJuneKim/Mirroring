@@ -8,9 +8,9 @@ import com.ssafy.ws.model.repo.UserRepo;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+	
 	private UserRepo repo;
-
+	
 	@Autowired
 	public UserServiceImpl(UserRepo repo) {
 		this.repo = repo;

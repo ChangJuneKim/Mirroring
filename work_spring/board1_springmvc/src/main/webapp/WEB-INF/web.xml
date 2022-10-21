@@ -39,7 +39,8 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
-		<!-- DispatcherServlet이 해당 mapping을 찾지 못할 경우(Controller에서 구현하지 않은 페이지 요청이 들어올 경우) -->
+		<!-- DispatcherServlet이 해당 mapping을 찾지 못할 경우(Controller에서 구현하지 않은 페이지 요청이 들어올 경우)
+			NoHandlerFoundException을 throw하게 설정 -->
 		<init-param>
 			<param-name>throwExceptionIfNoHandlerFound</param-name>
 			<param-value>true</param-value>

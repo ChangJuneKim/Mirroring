@@ -95,7 +95,8 @@ public class MemberDaoImpl implements MemberDao {
 				memberDto.setUserId(rs.getString("user_id"));
 				memberDto.setUserName(rs.getString("user_name"));
 			}
-		} finally {
+		}
+		finally {
 			dbUtil.close(rs, pstmt, conn);
 		}
 

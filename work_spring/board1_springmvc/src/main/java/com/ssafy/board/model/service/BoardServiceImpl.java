@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.dao.BoardDao;
-import com.ssafy.util.ParameterCheck;
 import com.ssafy.util.SizeConstant;
 
 @Service
@@ -24,7 +23,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
-		int pgNo = ParameterCheck.notNumberToOne(map.get("pgno"));
+		int pgNo = Integer.parseInt(map.get("pgno"));
 		int end = pgNo * SizeConstant.LIST_SIZE;
 		int start = end - SizeConstant.LIST_SIZE;
 		map.put("start", start + "");

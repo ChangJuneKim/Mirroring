@@ -8,9 +8,8 @@ import com.ssafy.ws.dto.Book;
 
 @Repository
 public class BookRepoImpl implements BookRepo {
-
-	public BookRepoImpl() {
-	}
+	
+	public BookRepoImpl() {}
 
 	@Override
 	public int insert(Book book) {

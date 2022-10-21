@@ -10,16 +10,15 @@ import com.ssafy.ws.model.repo.BookRepo;
 
 @Service
 public class BookServiceImpl implements BookService {
-
+	
 	private BookRepo repo;
-
-	public BookServiceImpl() {
-	}
-
+	
+	public BookServiceImpl() {}
+	
 	public BookRepo getBookRepo() {
 		return repo;
 	}
-	
+
 	@Autowired
 	public void setBookRepo(BookRepo repo) {
 		this.repo = repo;
