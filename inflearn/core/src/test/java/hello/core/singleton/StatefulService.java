@@ -9,7 +9,7 @@ public class StatefulService {
         this.price = price; // 여기가 문제!!!
     }
     
-    public int gerPrice(){
+    public int getPrice(){
         return price;
     }
 }
