@@ -7,16 +7,12 @@
 	<resultMap type="memberDto" id="member">
 		<result column="user_id" property="userId"/>
 		<result column="user_name" property="userName"/>
-		<result column="user_password" property="userPwd"/>
-		<result column="email_id" property="emailId"/>
-		<result column="email_domain" property="emailDomain"/>
-		<result column="join_date" property="joinDate"/>
 	</resultMap>
 
-	<select id="idCheck" parameterType="string" resultType="int">
+	<select id="idCheck" parameterType="String" resultType="int">
 		select count(user_id)
 		from members
-		where user_id = #{userId}
+		where user_id = #{userid}
 	</select>
 
 	<insert id="joinMember" parameterType="memberDto">

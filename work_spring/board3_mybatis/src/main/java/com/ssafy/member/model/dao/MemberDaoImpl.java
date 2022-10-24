@@ -3,6 +3,7 @@ package com.ssafy.member.model.dao;
 import java.sql.SQLException;
 import java.util.Map;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import com.ssafy.util.SqlMapConfig;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
-	
+
 	private final String NAMESPACE = "com.ssafy.member.model.dao.MemberDao.";
 
 	@Override

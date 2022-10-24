@@ -2,9 +2,12 @@ package com.ssafy.util;
 
 public class PageNavigation {
 	
-	private boolean startRange;
-	private boolean endRange;
-	private int totalCount;
+	// 총 글의 수가 313개라고 할때
+	// 총 페이지 수는 16개 (총 글의 수 313개 - 1) / (페이지당 글의 수 20개) + 1 = 16
+	// 총 글의 수 에서 -1을 해줘야 정확한 페이지 수가 나온다 (아니면 딱 떨어질때 이상하게 됨)
+	private boolean startRange; // 이전 버튼 활성화 여부
+	private boolean endRange; // 다음 버튼 활성화 여부
+	private int totalCount; 
 	private int newCount;
 	private int totalPageCount;
 	private int currentPage;

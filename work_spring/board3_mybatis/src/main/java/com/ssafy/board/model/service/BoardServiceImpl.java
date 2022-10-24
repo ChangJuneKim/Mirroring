@@ -31,14 +31,18 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		String key = map.get("key");
+		
 		if("userid".equals(key))
 			key = "b.user_id";
+		
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
+		
 		int pgNo = Integer.parseInt(map.get("pgno") == null ? "1" : map.get("pgno"));
-		int start = pgNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
-		param.put("start", start);
-		param.put("listsize", SizeConstant.LIST_SIZE);
+		int start = pgNo * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE; // 1 * 20 - 20 = 0
+		
+		param.put("start", start);// 0
+		param.put("listsize", SizeConstant.LIST_SIZE);// 20
 
 		return boardDao.listArticle(param);
 	}
@@ -53,12 +57,25 @@ public class BoardServiceImpl implements BoardService {
 
 		pageNavigation.setCurrentPage(currentPage);
 		pageNavigation.setNaviSize(naviSize);
-		int totalCount = boardDao.getTotalArticleCount(map);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		String key = map.get("key");
+		
+		if("userid".equals(key))
+			key = "user_id";
+		
+		param.put("key", key == null ? "" : key);
+		param.put("word", map.get("word") == null ? "" : map.get("word"));
+		
+		int totalCount = boardDao.getTotalArticleCount(param);
 		pageNavigation.setTotalCount(totalCount);
+		
 		int totalPageCount = (totalCount - 1) / sizePerPage + 1;
 		pageNavigation.setTotalPageCount(totalPageCount);
+		
 		boolean startRange = currentPage <= naviSize;
 		pageNavigation.setStartRange(startRange);
+		
 		boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;
 		pageNavigation.setEndRange(endRange);
 		pageNavigation.makeNavigator();

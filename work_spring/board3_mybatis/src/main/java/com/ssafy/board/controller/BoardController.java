@@ -105,6 +105,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 //		try {
 		List<BoardDto> list = boardService.listArticle(map);
+		
 		PageNavigation pageNavigation = boardService.makePageNavigation(map);
 		mav.addObject("articles", list);
 		mav.addObject("navigation", pageNavigation);

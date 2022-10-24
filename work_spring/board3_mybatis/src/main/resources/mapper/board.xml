@@ -3,64 +3,107 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.board.model.dao.BoardDao">
-	<resultMap type="boardDto" id="board">
-		<result column="article_no" property="articleNo" />
-		<result column="user_id" property="userId" />
-		<result column="subject" property="subject" />
-		<result column="content" property="content" />
-		<result column="hit" property="hit" />
-		<result column="register_time" property="registerTime" />
+
+	<resultMap type="boardDto" id="article">
+		<result column="article_no" property="articleNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="hit" property="hit"/>
+		<result column="register_time" property="registerTime"/>
+	</resultMap>
+	
+	<!-- extends가 있어서 위에 내용도 포함된다 -->
+	<resultMap type="boardDto" id="viewArticle" extends="article">
+		<collection property="fileInfos" column="article_no" javaType="list" ofType="fileInfoDto" select="fileInfoList"/>
+	</resultMap>
+	
+	<resultMap type="fileInfoDto" id="file">
+		<result column="save_folder" property="saveFolder"/>
+		<result column="original_file" property="originalFile"/>
+		<result column="save_file" property="saveFile"/>
 	</resultMap>
 
 	<insert id="writeArticle" parameterType="boardDto">
-		insert into board
-		(user_id, subject, content, hit, register_time)
-		values (#{userId},
-		#{subject}, #{content}, 0, now())
+		insert into board (user_id, subject, content, hit, register_time)
+		values (#{userId}, #{subject}, #{content}, 0, now())
+		<selectKey resultType="int" keyProperty="articleNo" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<insert id="registerFile" parameterType="boardDto">
+		insert into file_info (article_no, save_folder, original_file, save_file)
+		values
+		<foreach collection="fileInfos" item="fileinfo" separator=" , ">
+			(#{articleNo}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, #{fileinfo.saveFile})
+		</foreach>
 	</insert>
 
-	<select id="listArticle" parameterType="map" resultType="map">
-		select article_no, user_id, subject, content, hit, register_time
-		from
-		board
-		<if test="#{word} ne null">
-			<choose>
-				<when test='${key} eq "subject"'>
-					where subject like %#{word}%
-				</when>
-				<otherwise>
-					where user_id = #{word}
-				</otherwise>
-			</choose>
+	<!-- 반복적으로 사용할 쿼리를 sql 태그로 빼 놓을수 있다 -->
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				and ${key} = #{word}
+			</if>
 		</if>
-		order by article_no desc limit #{start}, #{spl}
-	</select>
+	</sql>
 
-	<select id="getArticle" parameterType="int" resultType="map">
-		select article_no, user_id, subject, content, hit, register_time
+	<select id="listArticle" parameterType="map" resultMap="article">
+		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name
+		from board b, members m 
+		where b.user_id = m.user_id
+		<!-- sql태그로 빼놓은 쿼리를 include로 가져올 수 있다 -->
+		<include refid="search"></include>
+		order by b.article_no desc
+		limit #{start}, #{listsize}
+	</select>
+	
+	<select id="getTotalArticleCount" parameterType="map" resultType="int">
+		select count(article_no)
 		from board
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
+	
+	<select id="getArticle" parameterType="int" resultMap="viewArticle">
+		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name 
+		from board b, members m
+		where b.user_id = m.user_id
+		and b.article_no = #{articleNo}
+	</select>
+	
+	<select id="fileInfoList" resultMap="file">
+		select save_folder, original_file, save_file
+		from file_info
 		where article_no = #{articleNo}
 	</select>
-
-	<select id="getTotalArticleCount" parameterType="map"
-		resultType="int">
-		select count(*) from board
-	</select>
-
+	
 	<update id="updateHit" parameterType="int">
 		update board
 		set hit = hit + 1
 		where article_no = #{articleNo}
 	</update>
-
+	
 	<update id="modifyArticle" parameterType="boardDto">
 		update board
 		set subject = #{subject}, content = #{content}
 		where article_no = #{articleNo}
 	</update>
-
+	
+	<delete id="deleteFile" parameterType="int">
+		delete from file_info
+		where article_no = #{articleNo}
+	</delete>
+	
 	<delete id="deleteArticle" parameterType="int">
 		delete from board
 		where article_no = #{articleNo}
 	</delete>
+
 </mapper>
