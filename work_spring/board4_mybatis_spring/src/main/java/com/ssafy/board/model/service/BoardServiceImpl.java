@@ -1,5 +1,6 @@
 package com.ssafy.board.model.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +29,11 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	public int writeArticle(BoardDto boardDto) throws Exception {
 		int articleNo = 0;
+		// 글을 쓰고
 		boardMapper.writeArticle(boardDto);
+		
 		List<FileInfoDto> fileInfos = boardDto.getFileInfos();
+		// 파일을 업로드 하는
 		if (fileInfos != null && !fileInfos.isEmpty()) {
 			articleNo = boardMapper.registerFile(boardDto);
 		}
@@ -93,9 +97,16 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	@Transactional
-	public void deleteArticle(int articleNo) throws Exception {
+	public void deleteArticle(int articleNo, String path) throws Exception {
+		List<FileInfoDto> fileList = boardMapper.fileInfoList(articleNo);
+		
 		boardMapper.deleteFile(articleNo);
 		boardMapper.deleteArticle(articleNo);
+		
+		for (FileInfoDto fileInfoDto : fileList) {
+			File file = new File(path + File.separator + fileInfoDto.getSaveFolder() + File.separator + fileInfoDto.getSaveFile());
+			file.delete();
+		}
 	}
 
 }

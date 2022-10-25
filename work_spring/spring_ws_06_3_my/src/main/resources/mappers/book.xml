@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafy.ws.model.dao.BookMapper">
+	
+	<select id="select" parameterType="String" resultType="book">
+		select isbn, title, author, price, content, img, org_img 
+		from book
+		where isbn like #{isbn}
+	</select>
+	
+	<select id="search" resultType="book">
+		select *
+		from book
+	</select>
+	
+	<insert id="insert" parameterType="book" >
+		insert into book (isbn, title, author, price, content, img, org_img)
+		values (#{isbn}, #{title}, #{author}, #{price}, #{content}, #{img}, #{orgImg})
+	</insert>
+	
+	<update id="update" parameterType="book" >
+		update book
+		set title = #{title}, price = #{price}
+		where isbn = #{isbn}
+	</update>
+	
+	<delete id="delete" parameterType="String" >
+		delete
+		from book
+		where isbn = #{isbn}
+	</delete>
+	
+	
+	<!-- 테스트용 -->
+	<delete id="deleteAll">
+		delete 
+		from book
+	</delete>
+	
+	<select id="getCount" resultType="int">
+		select count(*)
+		from book
+	</select>
+</mapper>
