@@ -26,4 +26,12 @@
 		FROM user
 		WHERE id = #{id}
 	</select>
+	
+	<!-- 로그인 처리 -->
+	<select id="login" parameterType="user" resultType="user">
+		SELECT id, name, rec_id
+		FROM user
+		WHERE id = #{id} AND pass = #{pass}
+	</select>
+
 </mapper>

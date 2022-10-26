@@ -1,7 +1,9 @@
 package com.ssafy.ws.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Book {
-	
+
 	private String isbn;
 	private String title;
 	private String author;
@@ -9,10 +11,13 @@ public class Book {
 	private String content;
 	private String img;
 	private String orgImg;
-	
-	public Book() {}
+	private MultipartFile upfile;
 
-	public Book(String isbn, String title, String author, Integer price, String content, String img, String orgImg) {
+	public Book() {
+	}
+
+	public Book(String isbn, String title, String author, Integer price, String content, String img, String orgImg,
+			MultipartFile upfile) {
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
@@ -20,6 +25,19 @@ public class Book {
 		this.content = content;
 		this.img = img;
 		this.orgImg = orgImg;
+		this.upfile = upfile;
+	}
+	
+	public Book(String isbn, String title, String author, Integer price, String content, String img, String orgImg) {
+		this(isbn, title, author, price, content, img, orgImg, null);
+	}
+
+	public MultipartFile getUpfile() {
+		return upfile;
+	}
+
+	public void setUpfile(MultipartFile upfile) {
+		this.upfile = upfile;
 	}
 
 	public String getIsbn() {
@@ -69,7 +87,7 @@ public class Book {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
+
 	public String getOrgImg() {
 		return orgImg;
 	}
@@ -81,21 +99,9 @@ public class Book {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book [isbn=");
-		builder.append(isbn);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", author=");
-		builder.append(author);
-		builder.append(", price=");
-		builder.append(price);
-		builder.append(", content=");
-		builder.append(content);
-		builder.append(", img=");
-		builder.append(img);
-		builder.append(", orgImg=");
-		builder.append(orgImg);
-		builder.append("]");
+		builder.append("Book [isbn=").append(isbn).append(", title=").append(title).append(", author=").append(author)
+				.append(", price=").append(price).append(", content=").append(content).append(", img=").append(img)
+				.append(", orgImg=").append(orgImg).append(", upfile=").append(upfile).append("]");
 		return builder.toString();
 	}
 

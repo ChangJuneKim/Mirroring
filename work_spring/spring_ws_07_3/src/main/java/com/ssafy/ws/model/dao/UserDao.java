@@ -11,5 +11,7 @@ public interface UserDao {
 	int getCount();
 
 	int insert(User user);
+
+	User login(User user);
 	
 }

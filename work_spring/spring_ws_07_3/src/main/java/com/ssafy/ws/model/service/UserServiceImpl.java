@@ -9,17 +9,36 @@ import com.ssafy.ws.model.dto.User;
 @Service
 public class UserServiceImpl implements UserService {
 	
-	private UserDao repo;
+	private UserDao userDao;
 	
 	@Autowired
-	public UserServiceImpl(UserDao repo) {
-		this.repo = repo;
+	public UserServiceImpl(UserDao userDao) {
+		this.userDao = userDao;
 	}
 
 	@Override
 	public User select(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.select(id);
+	}
+
+	@Override
+	public void deleteAll() {
+		userDao.deleteAll();
+	}
+
+	@Override
+	public int getCount() {
+		return userDao.getCount();
+	}
+
+	@Override
+	public int insert(User user) {
+		return userDao.insert(user);
+	}
+
+	@Override
+	public User login(User user) {
+		return userDao.login(user);
 	}
 
 }
