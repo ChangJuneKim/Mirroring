@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.cafe.model.mapper.UserDao">
+	
+	<select id="selectAll" parameterType="map" resultType="user">
+		select id, name, pass, stamps
+		from t_user
+		order by id desc
+	</select>
+	
+	<select id="select" parameterType="string" resultType="user">
+		select id, name, pass, stamps
+		from t_user
+		where id = #{userId}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		select count(*)
+		from t_user
+	</select>
+	
+	<delete id="deleteAll">
+		delete from t_user
+	</delete>
+	
+	<delete id="delete" parameterType="string" >
+		delete from t_user
+		where id = #{userId}
+	</delete>
+	
+	<insert id="insert" parameterType="user">
+		INSERT INTO t_user (id, name, pass, stamps)
+		 VALUES (#{id}, #{name}, #{pass}, #{stamps});
+	</insert>
+	
+	<update id="update" parameterType="user">
+		update t_user
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null">name = #{name},</if>
+			<if test="pass != null">pass = #{pass},</if>
+			<if test="stamps != null">stamps = #{stamps},</if>
+		</trim>
+		where id = #{id} 
+	</update>
+	
+</mapper>
