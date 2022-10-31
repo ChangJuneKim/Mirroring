@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
 		if (file != null && file.getSize() > 0) {
 
 			// 파일을 저장할 폴더 지정
-			Resource resource = resourceLoader.getResource("resources/static/upload");
+			Resource resource = resourceLoader.getResource("resources/upload");
 
 			// 서버에 저장할 파일 이름을 생성
 			String img = System.currentTimeMillis() + "_" + file.getOriginalFilename();
