@@ -1,63 +1,51 @@
 package com.ssafy.cafe.model.service;
 
 import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.ssafy.cafe.model.Product;
-import com.ssafy.cafe.model.User;
-import com.ssafy.cafe.model.mapper.ProductDao;
 
-@Service
-public class ProductServiceImpl implements ProductService{
-
-	private final ProductDao productDao;
-	
-	@Autowired
-	public ProductServiceImpl(ProductDao productDao) {
-		this.productDao = productDao;
-	}
+public class ProductServiceImpl implements ProductService {
 
 	@Override
-	public void deleteAll() throws Exception {
-		productDao.deleteAll();
-	}
-
-	@Override
-	public int getCount() throws Exception {
-		return productDao.getCount();
-	}
-
-	@Override
-	public int insert(Product product) throws Exception {
+	public void removeAll() {
 		// TODO Auto-generated method stub
-		return productDao.insert(product);
+		
 	}
 
 	@Override
-	public int update(Product product) throws Exception {
+	public int getCount() {
 		// TODO Auto-generated method stub
-		return productDao.update(product);
+		return 0;
 	}
 
 	@Override
-	public int delete(Integer productId) throws Exception {
+	public int addProduct(Product product) {
 		// TODO Auto-generated method stub
-		return productDao.delete(productId);
+		return 0;
 	}
 
 	@Override
-	public Product select(Integer productId) throws Exception {
+	public int modifyProduct(Product product) {
 		// TODO Auto-generated method stub
-		return productDao.select(productId);
+		return 0;
 	}
 
 	@Override
-	public List<Product> selectAll(Map<String, Object> map) throws Exception {
+	public int removeProduct(Integer productId) {
 		// TODO Auto-generated method stub
-		return productDao.selectAll(map);
+		return 0;
+	}
+
+	@Override
+	public Product getProduct(Integer productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> getProducts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

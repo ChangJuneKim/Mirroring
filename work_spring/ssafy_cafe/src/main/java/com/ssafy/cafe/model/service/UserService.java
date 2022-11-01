@@ -1,22 +1,23 @@
 package com.ssafy.cafe.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ssafy.cafe.model.User;
 
 public interface UserService {
-	void removeAll() throws Exception;
 
-	int getCount() throws Exception;
+	void removeAll();
 
-	int addUser(User user) throws Exception;
+	int getCount();
 
-	int modifyUser(User user) throws Exception;
+	int addUser(User user);
 
-	int deleteUser(String userId) throws Exception;
+	int modifyUser(User user);
 
-	User getUser(String userId) throws Exception;
+	int removeUser(String userId);
 
-	List<User> getUsers(Map<String, Object> map) throws Exception;
+	User getUser(String userId);
+
+	List<User> getUsers();
+	
 }

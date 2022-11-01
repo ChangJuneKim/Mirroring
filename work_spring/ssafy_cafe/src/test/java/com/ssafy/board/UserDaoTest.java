@@ -3,7 +3,6 @@ package com.ssafy.board;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Before;
@@ -52,7 +51,7 @@ public class UserDaoTest extends AbstractTest {
 	}
 
 	@Test
-	public void addAndGet() throws SQLException {  // 추가, 조회 테스트
+	public void addAndGet() {  // 추가, 조회 테스트
 		
 		userDao.deleteAll();
 		assertEquals(0, userDao.getCount());
@@ -77,7 +76,7 @@ public class UserDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void count() throws SQLException {  // count 메서드 테스트 
+	public void count() {  // count 메서드 테스트 
 		
 		userDao.deleteAll();
 		assertEquals(0, userDao.getCount());
@@ -93,7 +92,7 @@ public class UserDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void addAndUpdate() throws SQLException {  // 추가, 수정 테스트
+	public void addAndUpdate() {  // 추가, 수정 테스트
 		
 		userDao.deleteAll();
 		assertEquals(0, userDao.getCount());
@@ -117,7 +116,7 @@ public class UserDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void addAndDelete() throws SQLException {  // 추가, 삭제 테스트
+	public void addAndDelete() {  // 추가, 삭제 테스트
 		
 		userDao.deleteAll();
 		assertEquals(0, userDao.getCount());
@@ -135,7 +134,7 @@ public class UserDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void selectAll() throws SQLException {  // 모두 조회 테스트
+	public void selectAll() {  // 모두 조회 테스트
 		
 		userDao.deleteAll();
 		assertEquals(0, userDao.getCount());
@@ -147,7 +146,7 @@ public class UserDaoTest extends AbstractTest {
 		assertEquals(3, userDao.getCount());
 		
 		// 2. 모두 조회 테스트
-		List<User> users = userDao.selectAll(null);
+		List<User> users = userDao.selectAll();
 		assertEquals(3, users.size());
 	}
 	

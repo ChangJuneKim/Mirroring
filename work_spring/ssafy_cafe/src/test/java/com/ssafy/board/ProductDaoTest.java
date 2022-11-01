@@ -3,7 +3,6 @@ package com.ssafy.board;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Before;
@@ -52,7 +51,7 @@ public class ProductDaoTest extends AbstractTest {
 	}
 
 	@Test
-	public void addAndGet() throws SQLException {  // 추가, 조회 테스트
+	public void addAndGet() {  // 추가, 조회 테스트
 		
 		productDao.deleteAll();
 		assertEquals(0, productDao.getCount());
@@ -81,7 +80,7 @@ public class ProductDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void count() throws SQLException {  // count 메서드 테스트 
+	public void count() {  // count 메서드 테스트 
 		
 		productDao.deleteAll();
 		assertEquals(0, productDao.getCount());
@@ -97,7 +96,7 @@ public class ProductDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void addAndUpdate() throws SQLException {  // 추가, 수정 테스트
+	public void addAndUpdate() {  // 추가, 수정 테스트
 		
 		productDao.deleteAll();
 		assertEquals(0, productDao.getCount());
@@ -123,7 +122,7 @@ public class ProductDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void addAndDelete() throws SQLException {  // 추가, 삭제 테스트
+	public void addAndDelete() {  // 추가, 삭제 테스트
 		
 		productDao.deleteAll();
 		assertEquals(0, productDao.getCount());
@@ -141,7 +140,7 @@ public class ProductDaoTest extends AbstractTest {
 	}
 	
 	@Test
-	public void selectAll() throws SQLException {  // 모두 조회 테스트
+	public void selectAll() {  // 모두 조회 테스트
 		
 		productDao.deleteAll();
 		assertEquals(0, productDao.getCount());
@@ -153,7 +152,7 @@ public class ProductDaoTest extends AbstractTest {
 		assertEquals(3, productDao.getCount());
 		
 		// 2. 모두 조회 테스트
-		List<Product> products = productDao.selectAll(null);
+		List<Product> products = productDao.selectAll();
 		assertEquals(3, products.size());
 	}
 	

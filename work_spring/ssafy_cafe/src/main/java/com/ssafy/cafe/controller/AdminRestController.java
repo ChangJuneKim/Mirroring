@@ -22,105 +22,86 @@ import com.ssafy.cafe.model.service.UserService;
 @RequestMapping("/admin")
 @CrossOrigin("*")
 public class AdminRestController {
+
+	private UserService userService;
 	
-	private final UserService userService;
 
 	@Autowired
 	public AdminRestController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@GetMapping("/user")
-	public ResponseEntity<?> userList(){
+	public ResponseEntity<?> userList() {
+		List<User> users = userService.getUsers();
+
 		try {
-			List<User> users = userService.getUsers(null);
-			
-			if(users != null && !users.isEmpty()) {
+			if (users != null && !users.isEmpty()) {
 				return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-			} else {
+			}
+			else {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return exceptionHandling(e);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<String>("Error: userList()", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PostMapping("/user")
 	public ResponseEntity<?> userRegister(@RequestBody User user) {
-		try {
-			userService.addUser(user);
-			List<User> users = userService.getUsers(null);
-			if(users != null && !users.isEmpty()) {
-				return new ResponseEntity<List<User>>(users, HttpStatus.CREATED);
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return exceptionHandling(e);
-		}
+		userService.addUser(user);
+
+		// 새로운 회원목록 받아오기
+		List<User> users = userService.getUsers();
+		return new ResponseEntity<List<User>>(users, HttpStatus.CREATED);
 	}
-	
-	@PutMapping("/user")
-	public ResponseEntity<?> userModify(@RequestBody User user) {
-		try {
-			userService.modifyUser(user);
-			List<User> users = userService.getUsers(null);
-			if(users != null && !users.isEmpty()) {
-				return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return exceptionHandling(e);
-		}
-	}
-	
-	@DeleteMapping("/user/{userid}")
-	// 리턴되는 String이 view의 이름? 경로? 가 아니라 데이터 그 자체라는 뜻 (@ResponseBody)를 붙여야 되는데 컨트롤러 자체를 RestController라고 하면?
-	public ResponseEntity<?> userDelete(@PathVariable("userid") String userId) {
-		try {
-			
-			userService.deleteUser(userId);
-			List<User> users = userService.getUsers(null);
-			if(users != null && !users.isEmpty()) {
-				return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return exceptionHandling(e);
-		}
-	}
-	
+
 	@GetMapping("/user/{userid}")
-	// 리턴되는 String이 view의 이름? 경로? 가 아니라 데이터 그 자체라는 뜻 (@ResponseBody)를 붙여야 되는데 컨트롤러 자체를 RestController라고 하면?
-	public ResponseEntity<?> userView(@PathVariable("userid") String userId) {
+	public ResponseEntity<?> userInfo(@PathVariable("userid") String userId) {
+
 		try {
-			
 			User user = userService.getUser(userId);
-			
-			if(user != null) {
+			if (user != null) {
 				return new ResponseEntity<User>(user, HttpStatus.OK);
-			} else {
+			}
+			else {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return exceptionHandling(e);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<String>("Error: userInfo()", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-	private ResponseEntity<String> exceptionHandling(Exception e) {
-		return new ResponseEntity<String>("error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+
+	@PutMapping("/user/{userid}")
+	public ResponseEntity<?> userModify(@RequestBody User user, @PathVariable("userid") String userId) {
+		try {
+			user.setId(userId);
+			userService.modifyUser(user);
+
+			// 새로운 회원목록 받아오기
+			List<User> users = userService.getUsers();
+			return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<String>("Error: userModify()", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
+
+	@DeleteMapping("/user/{userid}")
+	public ResponseEntity<?> userRemove(@PathVariable("userid") String userId) {
+
+		try {
+			userService.removeUser(userId);
+
+			// 새로운 회원목록 받아오기
+			List<User> users = userService.getUsers();
+			return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<String>("Error: userRemove()", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }
