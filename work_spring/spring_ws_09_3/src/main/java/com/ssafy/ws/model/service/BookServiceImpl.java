@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -21,7 +23,9 @@ public class BookServiceImpl implements BookService {
 	private ResourceLoader resourceLoader;
 	@Autowired
 	private BookDao bookDao;
-
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@Override
 	public int insert(Book book) throws IllegalStateException, IOException {
 		MultipartFile file = book.getUpfile();
@@ -30,7 +34,7 @@ public class BookServiceImpl implements BookService {
 		if (file != null && file.getSize() > 0) {
 
 			// 파일을 저장할 폴더 지정
-			Resource resource = resourceLoader.getResource("resources/upload");
+			Resource resource = resourceLoader.getResource("classpath:static/resources/upload");
 
 			// 서버에 저장할 파일 이름을 생성
 			String img = System.currentTimeMillis() + "_" + file.getOriginalFilename();
@@ -40,8 +44,9 @@ public class BookServiceImpl implements BookService {
 
 			book.setImg(img);
 			book.setOrgImg(orgImg);
-
-			file.transferTo(new File(resource.getFile().getCanonicalPath() + "/" + book.getImg()));
+			
+			logger.debug("실제 저장 경로 : {}", resource.getFile().getCanonicalPath() + File.separator + book.getImg());
+			file.transferTo(new File(resource.getFile().getCanonicalPath() + File.separator + book.getImg()));
 		}
 		return bookDao.insert(book);
 	}
