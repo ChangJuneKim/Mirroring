@@ -12,19 +12,19 @@
 		SELECT COUNT(*)
 		FROM t_user
 	</select>
-	
-	<insert id="insert" parameterType="user">
+
+	<insert id="insert" parameterType="User">
 		INSERT INTO t_user (id, name, pass, stamps)
 		VALUES (#{id}, #{name}, #{pass}, #{stamps})
 	</insert>
 	
-	<select id="select" parameterType="string" resultType="user">
-		SELECT *
+	<select id="select" parameterType="string" resultType="User">
+		SELECT id, name, pass, stamps
 		FROM t_user
 		WHERE id = #{id}
 	</select>
-	
-	<update id="update" parameterType="user">
+
+	<update id="update" parameterType="User">
 		UPDATE t_user
 		SET
 			name = #{name},
@@ -34,18 +34,22 @@
 	</update>
 	
 	<delete id="delete" parameterType="string">
-		DELETE FROM t_user
+		DELETE
+		FROM t_user
 		WHERE id = #{id}
 	</delete>
 	
-	<select id="selectAll" resultType="user">
-		SELECT * FROM t_user
+	<select id="selectAll" resultType="User">
+		SELECT id, name, pass, stamps
+		FROM t_user
 		ORDER BY id DESC
 	</select>
 	
+	<!-- 로그인 처리 -->
 	<select id="login" parameterType="user" resultType="user">
 		SELECT id, name, stamps
 		FROM t_user
 		WHERE id = #{id} AND pass = #{pass}
 	</select>
+
 </mapper>
