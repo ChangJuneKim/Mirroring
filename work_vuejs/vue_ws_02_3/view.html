@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도서관리</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="header">
+      <a href="index.html">
+        <img src="./img/ssafy_logo.png" alt="logo" class="ssafy-logo">
+      </a>
+      <p class="logo">도서관리</p>
+    </div>
+
+    <div class="regist">
+      <h1 class="underline">SSAFY 도서 등록</h1>
+      <div class="regist-form">
+        <div>
+          <label for="isbn">도서번호</label>
+          <div class="view">{{ book.isbn }}</div>
+        </div>
+        <div>
+          <label for="title">도서명</label>
+          <div class="view">{{ book.title }}</div>
+        </div>
+        <div>
+          <label for="author">저자</label>
+          <div class="view">{{ book.author }}</div>
+        </div>
+        <div>
+          <label for="price">가격</label>
+          <div class="view">{{ book.price }}</div>
+        </div>
+        <div>
+          <label for="content">설명</label>
+          <div class="view">{{ book.content }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      name: "view",
+      data: {
+        book: {}
+      },
+
+      created() {
+        // URL에서 ISBN 번호 얻기
+        const params = new URL(document.location).searchParams;
+
+        const isbn = params.get("isbn");
+
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+
+        const [result] = bookList.filter((book) => isbn === book.isbn);
+
+
+        this.book = result;
+
+
+      },
+    })
+
+  </script>
+</body>
+
+</html>
