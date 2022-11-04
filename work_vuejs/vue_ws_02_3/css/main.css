@@ -41,7 +41,8 @@ label {
   width: 80px;
 }
 
-button {
+button,
+.btn {
   width: 8%;
   background-color: #d0d3d0;
   color: rgb(80, 82, 79);

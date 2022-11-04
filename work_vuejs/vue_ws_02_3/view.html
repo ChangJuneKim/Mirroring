@@ -20,7 +20,7 @@
     </div>
 
     <div class="regist">
-      <h1 class="underline">SSAFY 도서 등록</h1>
+      <h1 class="underline">SSAFY 도서 정보</h1>
       <div class="regist-form">
         <div>
           <label for="isbn">도서번호</label>
@@ -41,6 +41,11 @@
         <div>
           <label for="content">설명</label>
           <div class="view">{{ book.content }}</div>
+        </div>
+        <div style="padding-top : 15px">
+          <a v-bind:href="'./modify.html?isbn=' + book.isbn" class="btn">수정</a>
+          <a :href="'./delete.html?isbn=' + book.isbn" class="btn">삭제</a>
+          <a href="./list.html" class="btn">목록</a>
         </div>
       </div>
     </div>
@@ -63,11 +68,7 @@
         const bookList = JSON.parse(localStorage.getItem("bookList"));
 
         const [result] = bookList.filter((book) => isbn === book.isbn);
-
-
         this.book = result;
-
-
       },
     })
 

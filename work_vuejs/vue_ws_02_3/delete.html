@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
-  
+  <div id="app">
+    <div class="header">
+      <a href="index.html">
+        <img src="./img/ssafy_logo.png" alt="logo" class="ssafy-logo">
+      </a>
+      <p class="logo">도서관리</p>
+    </div>
+
+    <div>
+      <h1>SSAFY 도서 삭제</h1>
+      <div>삭제중</div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: "#app",
+      name: "delete",
+      created: function () {
+        const params = new URL(document.location).searchParams;
+        const isbn = params.get("isbn");
+
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+
+        const newBookList = bookList.filter(book => {
+          return isbn !== book.isbn;
+        })
+
+        localStorage.setItem("bookList", JSON.stringify(newBookList));
+
+        alert("삭제 완료");
+
+        location.href = "./list.html";
+      }
+    })
+  </script>
 </body>
+
 </html>
